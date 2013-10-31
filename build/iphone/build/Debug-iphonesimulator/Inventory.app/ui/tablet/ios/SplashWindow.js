@@ -1,0 +1,1 @@
+/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/SplashWindow.js

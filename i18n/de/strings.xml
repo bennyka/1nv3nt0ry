@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<!-- General -->
+	<string name="back">Zurück</string>
+	<string name="save">Speichern</string>
+	<!-- startView -->
+	<string name="inventory">Inventar</string>
+	<string name="createObject">Neues Objekt \n anlegen</string>
+	<string name="imprint">Impressum</string>
+	
+	<!-- ObjectView -->
+	<string name="createObjectHeadline">Neues Objekt</string>
+	<string name="name">Name</string>
+	<string name="category">Category</string>
+	<string name="serial">Serial</string>
+	<string name="brand">Brand</string>
+	<string name="addInvoice">Rechnung als Foto hinzufügen</string>
+</resources>
