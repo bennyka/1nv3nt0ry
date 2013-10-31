@@ -3,6 +3,7 @@ function SplashWindow() {
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#000000',
+		orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],
 		navBarHidden:true
 	});
 	

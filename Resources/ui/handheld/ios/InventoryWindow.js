@@ -6,6 +6,7 @@ function InventoryWindow(data) {
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
 		modal: true,
+		orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],
 		navBarHidden: true
 	});
 		

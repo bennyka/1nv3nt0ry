@@ -7,7 +7,7 @@ function StartWindow(data) {
 		backgroundColor:'#ffffff',
 		modal: true,
 		navBarHidden: true,
-		top:0,
+		orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT]
 	});
 		
 	//construct UI
