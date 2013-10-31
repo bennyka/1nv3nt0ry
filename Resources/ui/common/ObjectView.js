@@ -151,6 +151,7 @@ function ObjectView() {
 			left: 130,
 			bottom: 200
 		});
+		//init
 		win.add(dummyView);
 		win.addEventListener("open", function() {
 		win.orientationModes = [Titanium.UI.PORTRAIT];//[Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT, Titanium.UI.PORTRAIT];
