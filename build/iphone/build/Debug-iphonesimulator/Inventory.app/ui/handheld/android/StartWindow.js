@@ -1,1 +1,0 @@
-/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/android/StartWindow.js

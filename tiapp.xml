@@ -38,8 +38,8 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-    	<supports-screens android:anyDensity="false"/>
-           <application android:hardwareAccelerated="true" android:theme="@android:style/Theme.Holo"/>
+        <supports-screens android:anyDensity="false"/>
+        <application android:hardwareAccelerated="true" android:theme="@android:style/Theme.Holo"/>
     </android>
     <mobileweb>
         <precache/>
@@ -49,5 +49,7 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules/>
+    <modules>
+        <module platform="android">fh.imagefactory</module>
+    </modules>
 </ti:app>

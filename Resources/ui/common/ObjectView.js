@@ -1,6 +1,7 @@
 Ti.include("/lib/styles.js");
 Ti.include("/lib/toolbar.js");
 Ti.include("/lib/createButton.js");
+var ImageFactory = require('fh.imagefactory');	
 function ObjectView() {
 	var self = Ti.UI.createView({
 		width: Ti.App.Properties.getList('winDimensions')[0],
@@ -116,13 +117,10 @@ function ObjectView() {
 		}
 	}
 	
-	var imagePreview = Ti.UI.createView({
+	var imagePreview = Ti.UI.createImageView({
 		top: toolbar.height + 20,
 		right:10,
-		width:self.width/2.5,
-		height:self.width/2.5,
-		borderColor:'#ffffff',
-		borderWidth:1,
+		width:self.width/2.5
 	});
 	self.add(imagePreview);
 	
@@ -151,7 +149,6 @@ function ObjectView() {
 			left: 130,
 			bottom: 200
 		});
-		//init
 		win.add(dummyView);
 		win.addEventListener("open", function() {
 		win.orientationModes = [Titanium.UI.PORTRAIT];//[Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT, Titanium.UI.PORTRAIT];
@@ -239,11 +236,10 @@ function ObjectView() {
 			}).show();
 			return;
 		}
-		
-		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), data.id + '_' + data.photoCount + '.png');
-		file.write(image);		
+		var file = ImageFactory.rotateResizeImage(image, 250, 100); //TODO file isn't a image
+		// var file = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), 'test.png');
+		// file.write(image);	
 		imagePreview.image = file;
-		
 		image = null;
 		file = null;
 	}
