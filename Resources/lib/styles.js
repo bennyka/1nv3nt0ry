@@ -1,4 +1,4 @@
-var backgroundStyle = {
+var style = {
 	backgroundGradient: {
         type: 'linear',
         startPoint: { x: '0%', y: '0%' }, 
@@ -8,5 +8,6 @@ var backgroundStyle = {
             { color: '#286DD9', offset: 0.5 } 
         ]
     },
-    fontFamily:'Helvetica Neue'
+    specialFontFamily:(Ti.Platform.getOsname() != "android") ? "Honey Script" : "HoneyScript-Light"
+    
 };

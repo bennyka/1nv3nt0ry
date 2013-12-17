@@ -1,1 +1,0 @@
-function InventoryView(){var t=Ti.UI.createView();return t}module.exports=InventoryView;

@@ -1,1 +1,0 @@
-function StartWindow(e){var i=require("ui/common/StartView"),t=Ti.UI.createWindow({backgroundColor:"#ffffff",modal:!0,navBarHidden:!0}),o=new i(e);return t.add(o),o.addEventListener("shouldCloseView",function(){t.close()}),t}module.exports=StartWindow;

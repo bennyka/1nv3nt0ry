@@ -60,5 +60,10 @@
 	<array>
 		<string>appicon.png</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>/fonts/HoneyScript-Light.ttf</string>
+		<string>/fonts/HoneyScript-SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>

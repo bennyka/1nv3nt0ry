@@ -1,1 +1,0 @@
-function ObjectWindow(e){var t=require("ui/common/ObjectView"),i=Ti.UI.createWindow({backgroundColor:"#ffffff",modal:!0,orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],navBarHidden:!0}),o=new t(e);return i.add(o),o.addEventListener("shouldCloseView",function(){i.close()}),i}module.exports=ObjectWindow;
