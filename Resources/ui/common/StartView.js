@@ -11,9 +11,7 @@ function StartView() {
 	var areaTop= Ti.UI.createView({
 		top:0,
 		left:0,
-		height:"25%",
-		borderColor:'#000000',
-		borderWidth:1
+		height:"25%"
 	});
 	self.add(areaTop);
 	
@@ -31,8 +29,7 @@ function StartView() {
 		left:0,
 		height:"50%",
 		width:"50%",
-		borderColor:'#000000',
-		borderWidth:1
+		backgroundColor:style.whiteTransparentBackground
 	});
 	self.add(areaBtnLeft);
 	
@@ -61,8 +58,7 @@ function StartView() {
 		right:0,
 		height:"50%",
 		width:"50%",
-		borderColor:'#000000',
-		borderWidth:1
+		backgroundColor:style.whiteTransparentBackground
 	});
 	self.add(areaBtnRight);
 	
@@ -89,20 +85,29 @@ function StartView() {
 	var areaBottom = Ti.UI.createView({
 		bottom:0,
 		right:0,
-		height:"25%",
-		borderColor:'#000000',
-		borderWidth:1
+		height:"25%"
 	});
 	self.add(areaBottom);
 
-	// var btnImprint = createButton({
-		// title:L('imprint'),
-		// left:0,
-		// right:0,
-		// bottom:20,
-		// font: {fontFamily: 'Helvetica Neue', fontWeight:'bold',fontSize:"15dp"}
-	// });
-	// self.add(btnImprint);
+	var btnImpressum = Ti.UI.createView({
+		borderRadius:50,
+		height:100,
+		width:100,
+		backgroundColor:style.whiteTransparentBackground,
+		bottom:-40,
+		center:{x:'50%'}
+	});
+	areaBottom.add(btnImpressum);
+	
+	var btnImpressumTitle = Ti.UI.createLabel({
+		text:L('Impressum','Impressum'),
+		center:{x:'50%'},	
+		font:{fontFamily:style.specialFontFamily,fontSize:"25dp"},
+		color:'#ffffff',
+		bottom:5
+		
+	});
+	areaBottom.add(btnImpressumTitle);
 	return self;
 };
 

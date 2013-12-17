@@ -8,6 +8,7 @@ var style = {
             { color: '#286DD9', offset: 0.5 } 
         ]
     },
+    whiteTransparentBackground:'#33ffffff',
     specialFontFamily:(Ti.Platform.getOsname() != "android") ? "Honey Script" : "HoneyScript-Light"
     
 };
