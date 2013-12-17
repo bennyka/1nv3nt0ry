@@ -1,0 +1,1 @@
+Ti.include("lib/config.js"),1.8>Ti.version&&alert("Sorry - this application template requires Titanium Mobile SDK 1.8 or later"),function(){Ti.Platform.osname,Ti.Platform.version,Ti.Platform.displayCaps.platformHeight,Ti.Platform.displayCaps.platformWidth,Window=require(Ti.App.config.windowPath+"SplashWindow"),(new Window).open()}();

@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=inventory
+iosLaunchConfigurationAttributes/appid=de.bk.inventory
+iosLaunchConfigurationAttributes/certificate=HPM Kommunikation GmbH
+iosLaunchConfigurationAttributes/distribute_path=/Users/bennyka/Documents
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/output_format=ipa
+iosLaunchConfigurationAttributes/sdk_version=6.1
+iosLaunchConfigurationAttributes/uuid=AD2E0843-5D61-48F9-A4EB-96C4C896F227

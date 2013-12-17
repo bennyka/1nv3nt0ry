@@ -1,0 +1,1 @@
+function InventoryWindow(e){var t=require("ui/common/InventoryView"),i=Ti.UI.createWindow({backgroundColor:"#ffffff",orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],modal:!0,navBarHidden:!0}),o=new t(e);return i.add(o),o.addEventListener("shouldCloseView",function(){i.close()}),i}module.exports=InventoryWindow;

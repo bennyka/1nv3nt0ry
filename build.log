@@ -5,14 +5,46 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.015111 seconds on emulator to get ready
+[DEBUG] waited 0.014615 seconds on emulator to get ready
 [DEBUG] de.bk.inventory installed? False
 [INFO] Copying CommonJS modules...
 [INFO] Copying project resources..
-[TRACE] COPYING MODIFIED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/common/ObjectView.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/common/ObjectView.js
+[INFO] Detected change in tiapp.xml, or assets deleted. Forcing full re-build...
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/android/appicon.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/appicon.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/android/default.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/default.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/app.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/images/inventory.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/images/inventory.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/images/object.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/images/object.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/KS_nav_ui.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/KS_nav_ui.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/KS_nav_views.png => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/KS_nav_views.png
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/lib/config.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/lib/config.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/lib/createButton.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/lib/createButton.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/lib/styles.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/lib/styles.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/lib/toolbar.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/lib/toolbar.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/common/InventoryView.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/common/InventoryView.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/common/ObjectView.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/common/ObjectView.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/common/SplashView.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/common/SplashView.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/common/StartView.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/common/StartView.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/android/InventoryWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/android/InventoryWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/android/ObjectWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/android/ObjectWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/android/SplashWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/android/SplashWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/android/StartWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/android/StartWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/ios/InventoryWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/ios/InventoryWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/ios/ObjectWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/ios/ObjectWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/ios/SplashWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/ios/SplashWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/handheld/ios/StartWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/handheld/ios/StartWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/android/InventoryWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/android/InventoryWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/android/ObjectWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/android/ObjectWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/android/SplashWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/android/SplashWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/android/StartWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/android/StartWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/InventoryWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/ios/InventoryWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/ObjectWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/ios/ObjectWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/SplashWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/ios/SplashWindow.js
+[TRACE] COPYING CREATED FILE: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/StartWindow.js => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/ui/tablet/ios/StartWindow.js
 [DEBUG] LiveView not enabled
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
+[DEBUG] app stylesheet => /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/ApplicationStylesheet.java
 [DEBUG] copying app icon: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/appicon.png
 [DEBUG] generating theme.xml
 [DEBUG] found drawable-long-land-hdpi splash screen at /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/android/images/res-long-land-hdpi/default.png
@@ -37,11 +69,12 @@ Logfile initialized
 [DEBUG] copying /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/res/drawable-notlong-port-mdpi/background.png
 [DEBUG] found splash screen at /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/assets/Resources/default.png
 [TRACE] Writing out AndroidManifest.xml
+[DEBUG] adding /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/ApplicationStylesheet.java to javac build list
 [DEBUG] adding /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryActivity.java to javac build list
 [DEBUG] adding /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryAppInfo.java to javac build list
 [DEBUG] adding /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryApplication.java to javac build list
 [DEBUG] adding /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/R.java to javac build list
-[DEBUG] Building Java Sources: "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryActivity.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryAppInfo.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryApplication.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/R.java"
+[DEBUG] Building Java Sources: "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/ApplicationStylesheet.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryActivity.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryAppInfo.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryApplication.java" "/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/R.java"
 [INFO] Compiling Android Resources... This could take some time
 [DEBUG] Android classes.dex built
 [DEBUG] creating unsigned apk: /Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/build/android/bin/app-unsigned.apk
@@ -125,6 +158,6 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.015124 seconds on emulator to get ready
+[DEBUG] waited 0.015475 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Application installed. Launch from drawer on Home Screen

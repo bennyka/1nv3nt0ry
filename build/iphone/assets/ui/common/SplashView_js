@@ -1,0 +1,1 @@
+function SplashView(){var e=Ti.UI.createView();return Ti.App.addEventListener("startApp",function(){var t=require(Ti.App.config.windowPath+"StartWindow"),i=new t;i.open(),e.fireEvent("shouldCloseView")}),e}module.exports=SplashView;
