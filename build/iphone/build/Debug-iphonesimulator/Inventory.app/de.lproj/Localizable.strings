@@ -1,0 +1,16 @@
+/**
+ * Appcelerator Titanium
+ * this is a generated file - DO NOT EDIT
+ */
+
+"back" = "Zurück";
+"save" = "Speichern";
+"inventory" = "Inventar";
+"createObject" = "Neues Objekt \n anlegen";
+"imprint" = "Impressum";
+"createObjectHeadline" = "Neues Objekt";
+"name" = "Name";
+"category" = "Category";
+"serial" = "Serial";
+"brand" = "Brand";
+"addInvoice" = "Rechnung als Foto hinzufügen";

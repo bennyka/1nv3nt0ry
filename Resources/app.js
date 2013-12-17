@@ -26,6 +26,6 @@ if (Ti.version < 1.8 ) {
 	
 	//considering tablet to have one dimension over 900px - this is imperfect, so you should feel free to decide
 	//yourself what you consider a tablet form factor for android
-	Window = require(Ti.App.config.windowPath + "SplashWindow");
+	Window = require(Ti.App.config.windowPath + "StartWindow");
 	new Window().open();
 })();
