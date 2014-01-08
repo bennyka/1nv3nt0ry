@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -98,6 +98,7 @@
 	// for autoreverse
     TiAnimation* reverseAnimation;
     BOOL isReverse;
+    BOOL resetState;
 }
 
 /**
@@ -109,6 +110,7 @@
 @property(nonatomic,readonly) ListenerEntry* callback;
 @property(nonatomic,readwrite,assign) TiAnimation* reverseAnimation;
 @property(nonatomic,readwrite,assign) BOOL isReverse;
+@property(nonatomic,readwrite,assign) BOOL resetState;
 
 // animatable properties against what is being animated
 @property(nonatomic,retain,readwrite) NSNumber	*zIndex;

@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -495,6 +495,39 @@ bool Base64AllocAndEncodeData(const void *inInputData, size_t inInputDataSize, c
 +(CGFloat)floatValue:(id)value
 {
 	return [self floatValue:value def:NSNotFound];
+}
+
+/* Example:
+ shadow = {
+    offset: {
+        width: 10,
+        height: 10
+    },
+    blurRadius: 10,
+    color: 'red'
+ }
+ */
++(NSShadow*)shadowValue:(id)value
+{
+    if(![value isKindOfClass:[NSDictionary class]]) return nil;
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+
+    id offset = [value objectForKey:@"offset"];
+    if (offset != nil && [offset isKindOfClass:[NSDictionary class]]) {
+        id w = [offset objectForKey:@"width"];
+        id h = [offset objectForKey:@"height"];
+        [shadow setShadowOffset: CGSizeMake([TiUtils floatValue:w def:0], [TiUtils floatValue:h def:0])];
+    }
+    id blurRadius = [value objectForKey:@"blurRadius"];
+    if (blurRadius != nil) {
+        [shadow setShadowBlurRadius:[TiUtils floatValue:blurRadius def:0]];
+    }
+    id color = [value objectForKey:@"color"];
+    if(color != nil) {
+        [shadow setShadowColor:[[TiUtils colorValue:color] _color]];
+    }
+    return [shadow autorelease];
 }
 
 +(int)intValue:(id)value def:(int)def valid:(BOOL *) isValid {

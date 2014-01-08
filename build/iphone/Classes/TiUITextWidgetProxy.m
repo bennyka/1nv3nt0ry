@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -43,6 +43,11 @@ DEFINE_DEF_BOOL_PROP(suppressReturn,YES);
 	RELEASE_TO_NIL(keyboardToolbarItems);
 	RELEASE_TO_NIL(keyboardUIToolbar);
 	[super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.UI.TextWidget";
 }
 
 
@@ -100,6 +105,10 @@ DEFINE_DEF_BOOL_PROP(suppressReturn,YES);
 		[self contentsWillChange];
 		[self fireEvent:@"change" withObject:[NSDictionary dictionaryWithObject:newValue forKey:@"value"]];
 	}
+    TiThreadPerformOnMainThread(^{
+        //Make sure the text widget is in view when editing.
+        [(TiUITextWidget*)[self view] updateKeyboardStatus];
+    }, NO);
 }
 
 #pragma mark Toolbar
@@ -272,6 +281,18 @@ DEFINE_DEF_BOOL_PROP(suppressReturn,YES);
     return TiDimensionAutoSize;
 }
 
+-(void)setSelection:(id)arg withObject:(id)property
+{
+    NSInteger start = [TiUtils intValue:arg def: -1];
+    NSInteger end = [TiUtils intValue:property def:-1];
+    NSString* curValue = [TiUtils stringValue:[self valueForKey:@"value"]];
+    NSInteger textLength = [curValue length];
+    if ((start < 0) || (start > textLength) || (end < 0) || (end > textLength)) {
+        DebugLog(@"Invalid range for text selection. Ignoring.");
+        return;
+    }
+    TiThreadPerformOnMainThread(^{[(TiUITextWidget*)[self view] setSelectionFrom:arg to:property];}, NO);
+}
 USE_VIEW_FOR_CONTENT_HEIGHT
 USE_VIEW_FOR_CONTENT_WIDTH
 

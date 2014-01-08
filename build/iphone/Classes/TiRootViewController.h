@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -55,6 +55,7 @@
 -(void)repositionSubviews;
 -(UIView *)topWindowProxyView;
 -(NSUInteger)supportedOrientationsForAppDelegate;
+-(void)updateStatusBar;
 @property (nonatomic, readonly) BOOL statusBarInitiallyHidden;
 @property (nonatomic, readonly) UIStatusBarStyle defaultStatusBarStyle;
 @property (nonatomic, readonly) BOOL statusBarVisibilityChanged;
@@ -62,6 +63,7 @@
 #if defined(DEBUG) || defined(DEVELOPER)
 -(void)shutdownUi:(id)arg;
 #endif
+- (UIImage*)defaultImageForOrientation:(UIDeviceOrientation) orientation resultingOrientation:(UIDeviceOrientation *)imageOrientation idiom:(UIUserInterfaceIdiom*) imageIdiom;
 
 
 @end

@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -121,6 +121,11 @@ NSString* const DATA_IFACE = @"pdp_ip0";
 	RELEASE_TO_NIL(availableMemory);
 	RELEASE_TO_NIL(capabilities);
 	[super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Platform";
 }
 
 -(void)_listenerAdded:(NSString *)type count:(int)count

@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -1107,6 +1107,7 @@ DEFINE_EXCEPTIONS
 		KrollWrapper * newValue = [[[KrollWrapper alloc] init] autorelease];
 		[newValue setBridge:(KrollBridge*)[[(KrollCallback*)value context] delegate]];
 		[newValue setJsobject:[(KrollCallback*)value function]];
+		[newValue protectJsobject];
 		value = newValue;
 	}
     
@@ -1273,6 +1274,13 @@ DEFINE_EXCEPTIONS
 	// this is called in the case you try and use JSON.stringify and an object is a proxy 
 	// since you can't serialize a proxy as JSON, just return null
 	return [NSNull null];
+}
+
+//For subclasses to override
+-(NSString*)apiName
+{
+    DebugLog(@"[ERROR] Subclasses must override the apiName API endpoint.");
+    return @"Ti.Proxy";
 }
 
 + (id)createProxy:(NSString*)qualifiedName withProperties:(NSDictionary*)properties inContext:(id<TiEvaluator>)context

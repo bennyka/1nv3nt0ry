@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -100,6 +100,11 @@ extern BOOL const TI_APPLICATION_ANALYTICS;
 	[super _configure];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessibilityVoiceOverStatusChanged:)
 										name:UIAccessibilityVoiceOverStatusChanged object:nil];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.App";
 }
 
 -(void)addEventListener:(NSArray*)args
@@ -389,18 +394,8 @@ extern BOOL const TI_APPLICATION_ANALYTICS;
     [nc addObserver:self selector:@selector(willShutdown:) name:kTiWillShutdownNotification object:nil];
     [nc addObserver:self selector:@selector(willShutdownContext:) name:kTiContextShutdownNotification object:nil];
 
-
-#if __IPHONE_OS_VERSION_MIN_ALLOWED >= __IPHONE_5_0
-    if ([TiUtils isIOS5OrGreater])
-    {
-        [nc addObserver:self selector:@selector(keyboardFrameChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    }
-#else
-    
-    [nc addObserver:self selector:@selector(keyboardFrameChanged:) name:UIKeyboardDidShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardFrameChanged:) name:UIKeyboardDidHideNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardFrameChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [nc addObserver:self selector:@selector(timeChanged:) name:UIApplicationSignificantTimeChangeNotification object:nil];
-#endif	
     
     [super startup];
 }
@@ -591,6 +586,14 @@ extern BOOL const TI_APPLICATION_ANALYTICS;
 -(NSNumber*)keyboardVisible
 {
     return NUMBOOL([[[TiApp app] controller] keyboardVisible]);
+}
+
+-(void)setForceSplashAsSnapshot:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSNumber)
+    [self replaceValue:args forKey:@"forceSplashAsSnapshot" notification:NO];
+    BOOL flag = [TiUtils boolValue:args def:NO];
+    [[TiApp app] setForceSplashAsSnapshot:flag];
 }
 
 #if defined(USE_TI_APPIOS)

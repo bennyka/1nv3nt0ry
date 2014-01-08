@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -15,6 +15,10 @@
 #import "TiViewProxy.h"
 #import "TiApp.h"
 #import "TiUITextWidget.h"
+
+#ifdef USE_TI_UIIOSATTRIBUTEDSTRING
+#import "TiUIiOSAttributedStringProxy.h"
+#endif
 
 @implementation TiTextField
 
@@ -368,6 +372,15 @@
 	[[self textWidgetView] setPlaceholder:[TiUtils stringValue:value]];
 }
 
+-(void)setAttributedHintText_:(id)value
+{
+#ifdef USE_TI_UIIOSATTRIBUTEDSTRING
+    ENSURE_SINGLE_ARG(value,TiUIiOSAttributedStringProxy);
+    [[self proxy] replaceValue:value forKey:@"attributedHintText" notification:NO];
+    [[self textWidgetView] setAttributedPlaceholder:[value attributedString]];
+#endif
+}
+
 -(void)setMinimumFontSize_:(id)value
 {
     CGFloat newSize = [TiUtils floatValue:value];
@@ -466,29 +479,6 @@
 	return [[f text] length] > 0;
 }
 
--(void)setSelectionFrom:(id)start to:(id)end 
-{
-    if([TiUtils isIOS5OrGreater]) {
-        UITextField *textField = [self textWidgetView];
-        if ([textField conformsToProtocol:@protocol(UITextInput)]) {
-            if([self becomeFirstResponder]){
-                UITextPosition *beginning = textField.beginningOfDocument;
-                UITextPosition *startPos = [textField positionFromPosition:beginning offset:[TiUtils intValue: start]];
-                UITextPosition *endPos = [textField positionFromPosition:beginning offset:[TiUtils intValue: end]];
-                UITextRange *textRange;
-                textRange = [textField textRangeFromPosition:startPos toPosition:endPos];
-                [textField setSelectedTextRange:textRange];
-            }
-            
-        } else {
-            DebugLog(@"UITextField does not conform with UITextInput protocol. Ignore");
-        }
-    } else {
-        DebugLog(@"Selecting text is only supported with iOS5+");
-    }
-    
-}
-
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)tf
@@ -522,7 +512,12 @@
         return NO;
     }
 
-	[(TiUITextFieldProxy *)self.proxy noteValueChange:curText];
+    /*
+        Adding a small delay as `change` event can be fired even before the textfield text is actually updated by the system,
+        leading to race conditions. Refer to TIMOB-16014
+     */
+
+	[(TiUITextFieldProxy *)self.proxy performSelector:@selector(noteValueChange:) withObject:curText afterDelay:0.01];
 	return YES;
 }
 

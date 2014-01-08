@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -50,6 +50,11 @@ static NSString* ARG_KEY = @"arg";
 {
     // Calls _destroy
     [super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Network.Socket.TCP";
 }
 
 -(void)_destroy

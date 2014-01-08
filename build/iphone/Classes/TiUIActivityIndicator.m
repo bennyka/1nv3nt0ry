@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -216,6 +216,18 @@
 		}
 	}
 
+}
+
+- (void)didMoveToWindow
+{
+    //TIMOB-15293
+    if ( ([self window] != nil) && (indicatorView != nil) && (![indicatorView isAnimating]) ) {
+        BOOL visible = [TiUtils boolValue:[[self proxy] valueForKey:@"visible"] def:NO];
+        if (visible) {
+            [indicatorView startAnimating];
+        }
+    }
+    [super didMoveToWindow];
 }
 
 -(CGFloat)contentWidthForWidth:(CGFloat)suggestedWidth

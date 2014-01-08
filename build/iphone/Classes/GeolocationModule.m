@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -201,6 +201,11 @@ extern BOOL const TI_APPLICATION_ANALYTICS;
 	RELEASE_TO_NIL(lock);
 	RELEASE_TO_NIL(lastLocationDict);
 	[super _destroy];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Geolocation";
 }
 
 -(void)contextWasShutdown:(KrollBridge*)bridge
@@ -703,7 +708,7 @@ extern BOOL const TI_APPLICATION_ANALYTICS;
 {
     if ([TiUtils isIOS6OrGreater]) {
         activityType = [TiUtils intValue:value];
-        TiThreadPerformOnMainThread(^{[locationManager setActivityType:accuracy];}, NO);
+        TiThreadPerformOnMainThread(^{[locationManager setActivityType:activityType];}, NO);
     }
     
 }

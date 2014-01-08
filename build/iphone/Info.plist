@@ -64,6 +64,7 @@
 	<array>
 		<string>/fonts/HoneyScript-Light.ttf</string>
 		<string>/fonts/HoneyScript-SemiBold.ttf</string>
+		<string>/fonts/glyphicons-regular.otf</string>
 	</array>
 </dict>
 </plist>

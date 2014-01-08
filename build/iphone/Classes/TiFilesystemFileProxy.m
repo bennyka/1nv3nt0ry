@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -38,6 +38,11 @@ static const char* backupAttr = "com.apple.MobileBackup";
 	RELEASE_TO_NIL(fm);
     RELEASE_TO_NIL(path);
 	[super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Filesystem.File";
 }
 
 -(id)nativePath

@@ -1,49 +1,111 @@
 Ti.include("/lib/styles.js");
-Ti.include("/lib/toolbar.js");
-Ti.include("/lib/createButton.js");
-var ImageFactory = require('fh.imagefactory');	
-function ObjectView() {
+Ti.include("/lib/dataHandler.js");
+// var ImageFactory = require('fh.imagefactory');	
+
+
+function ObjectView(data) {
+	var editMode = false;
+	if (data){
+		editMode = true;
+	}
+	var objData = {};
+	if (!editMode){
+		// set date
+		var currentdate = new Date();
+		objData.date = currentdate.getDate()+"."+(currentdate.getMonth()+1)+"."+currentdate.getFullYear(); 
+		// set id
+		var timestamp = new Date().getTime();
+		objData.id = timestamp;
+	}
 	var self = Ti.UI.createView({
-		width: Ti.App.Properties.getList('winDimensions')[0],
-		height: Ti.App.Properties.getList('winDimensions')[1],
-		backgroundColor:backgroundStyle.backgroundColor
+		backgroundGradient:style.backgroundGradient
 	});
+
+	// ++++++++++++++TOP++++++++++++++
+	var areaTop= Ti.UI.createView({
+		top:0,
+		left:0,
+		height:"25%"
+	});
+	self.add(areaTop);
+	
 	if (Ti.Platform.getOsname() != "android"){
-		var btnBack = createButton({
-			title:L('back'),
+		var btnBack = Ti.UI.createButton({
+			title:L(' back ',' zurück '),
+			top:25,
+			left:5,
+			color:'#ffffff',
+			borderColor:'#ffffff',
+			borderWidth:1,
+			borderRadius:5
 		});
-		btnBack.addEventListener("click", function(){
+		btnBack.addEventListener("click", function(e){
 			self.fireEvent("shouldCloseView");
 		});
+		areaTop.add(btnBack);
 	}
 	
-	var btnSave = createButton({
-		title:L('save'),
+	var btnSave = Ti.UI.createButton({
+		title:L(' save ',' speichern '),
+		top:25,
+		right:5,
+		color:'#ffffff',
+		borderColor:'#ffffff',
+		borderWidth:1,
+		borderRadius:5
 	});
 	btnSave.addEventListener("click", function(){
-		//save & go back
-		
+		if (editMode){
+			updateData(data);
+		} else {
+			saveData(objData);
+		};
 		self.fireEvent("shouldCloseView");
 	});
+	areaTop.add(btnSave);
 	
-	var toolbar = createToolbar({
-		title:L('createObjectHeadline'),
-		leftNavButton:(Ti.Platform.getOsname() != "android") ? [btnBack] : [],
-		rightNavButton:[btnSave]
+	var headline = Ti.UI.createLabel({
+		text:L('add Object','Objekt hinzufügen'),
+		center:{x:'50%',y:'50%'},
+		font: {fontFamily: style.specialFontFamily, fontSize:"40sp"},
+		color:'#ffffff'
 	});
-	self.add(toolbar);
+	areaTop.add(headline);
+	// ++++++++++++++BOTTOM++++++++++++++
+	var areaBottom= Ti.UI.createView({
+		bottom:0,
+		left:0,
+		height:"75%",
+		backgroundColor:style.whiteTransparentBackground
+	});
+	self.add(areaBottom);
 	var inputField = [
+		// {
+			// id:"invoice",
+			// width:200,
+			// type:'button',
+			// title:L('addInvoice')
+		// }
 		{
-			id:"name",
-			width:'40%',
+			id:"serial",
+			width:'50%',
 			type:'textfield',
-			hintText:L('name')+"..."
+			hintText:L('Serial','Seriennummer')+"...",
+			title:L('Serial','Seriennummer')
+		},
+		{
+			id:"category",
+			width:'50%',
+			type:'textfield',
+			hintText:L('Category','Kategorie')+"...",
+			title:L('Category','Kategorie')
 		},
 		{
 			id:"brand",
-			width:'40%',
+			width:'50%',
 			type:'textfield',
-			hintText:L('brand')+"...",
+			hintText:L('Brand','Marke')+"...",
+			title:L('Brand','Marke'),
 			brandList:[
 				"Sony",
 				"LG",
@@ -52,57 +114,87 @@ function ObjectView() {
 			]
 		},
 		{
-			id:"category",
-			width:200,
+			id:"description",
+			width:'80%',
 			type:'textfield',
-			hintText:L('category')+"..."
+			hintText:L('Bezeichnung','Bezeichnung')+"...",
+			title:L('Bezeichnung','Bezeichnung')
 		},
-		{
-			id:"serial",
-			width:200,
-			type:'textfield',
-			hintText:L('serial')+"..."
-		},
-		{
-			id:"invoice",
-			width:200,
-			type:'button',
-			title:L('addInvoice')
-		}
 	];
+
 	for (i in inputField){
 		switch(inputField[i].type){
 			case "textfield":
 				// create standard textfield
 				var textfield = Ti.UI.createTextField({
-					top:(toolbar.height + 20) + (20 + 50)*i,
-					height:35,
+					bottom:(20 + (50*i)),
 					left:10,
 					width:inputField[i].width,
 					paddingLeft:4,
 					paddingRight:4,
-					borderRadius:3,
 					borderColor:'#ffffff',
 					borderWidth:1,
 					id:inputField[i].id,
 					hintText:inputField[i].hintText,
 					color: '#ffffff',
-					font: {fontFamily: 'Helvetica Neue', fontSize:15}		
+					font: {fontFamily: 'Helvetica Neue', fontSize:"13sp", color:'#000000'}		
 				});
-				self.add(textfield);
+				areaBottom.add(textfield);
 				
-				textfield.addEventListener("change", function(){
-					// save the inputtext
+				textfield.addEventListener("blur", function(e){
+					switch(e.source.id){
+						case 'serial':
+							objData.serial = e.value;
+							break;
+						case 'brand':
+							objData.brand = e.value;
+							break;
+						case 'description':
+							objData.description = e.value;
+							break;
+						case 'category':
+							objData.category = e.value;
+							break;
+					}
 				});
+				
+				if (editMode) {
+					switch(inputField[i].id){
+						case 'serial':
+							textfield.value = data.serial;
+							break;
+						case 'brand':
+							textfield.value = data.brand;
+							break;
+						case 'description':
+							textfield.value = data.description;
+							break;
+						case 'category':
+							textfield.value = data.category;
+							break;
+					}
+				}
+				
+				var textfieldTitle = Ti.UI.createLabel({
+					text:inputField[i].title,
+					bottom:(37 + (50*i)),
+					width:100,
+					left:10,
+					visible:(Ti.Platform.getOsname() != "android") ? true : false,
+					color: '#ffffff',
+					font: {fontFamily: 'Helvetica Neue', fontSize:"12sp", color:'#000000'}			
+				});
+				areaBottom.add(textfieldTitle);
+				
 				break;
 			case "dropdown":
 				// create picker of dropdown menu
 				break;
 			case "button":
 				// create button
-				var button = createButton({
+				var button = Ti.UI.createButton({
 					title:inputField[i].title,
-					top:(toolbar.height + 20) + (20 + 50)*i,
+					top:(20 + 50)*i,
 					height:35,
 					left:10,
 					width:inputField[i].width,
@@ -110,23 +202,50 @@ function ObjectView() {
 					borderWidth:1,
 					id:inputField[i].id
 				});
-				self.add(button);
+				areaBottom.add(button);
 				
 				button.addEventListener("click", addPhoto);
 				break;
 		}
 	}
+	// ++++++++++++++IMG CONTAINER++++++++++++++
+	var imageContainer = Ti.UI.createView({
+		height:170,
+		width:170,
+		top:0,
+		center:{x:'50%'}
+	});
+	areaBottom.add(imageContainer);
 	
 	var imagePreview = Ti.UI.createImageView({
-		top: toolbar.height + 20,
-		right:10,
-		width:self.width/2.5
+		image:(editMode) ? data.image : null,
+		backgroundColor:style.whiteTransparentBackground,
+		borderRadius:(Ti.Platform.getOsname() == "android") ? 120 : 60,
+		borderWidth:3,
+		borderColor:'#ffffff',
+		width:120,
+		height:120,
+		center:{x:'50%',y:'50%'}
 	});
-	self.add(imagePreview);
-	
+	imageContainer.add(imagePreview);
 	imagePreview.addEventListener("singletap", addPhoto);
 	
-	// functions
+	var addIcon = Titanium.UI.createButton({
+		top:5,
+		right:0,
+		height:50,
+		width:50,
+		title: '\u002B',
+		backgroundColor:'transparent',
+		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+		color: '#ffffff',
+		selectedColor: '#994c616e',
+		font: {fontFamily: 'GLYPHICONS', fontSize: '24sp'},
+	});
+	imageContainer.add(addIcon);
+	addIcon.addEventListener("singletap", addPhoto);	
+	
+	// ++++++++++++++FUNCTIONS++++++++++++++
 	/*
 	 * addPhoto
 	 * shows dialog to choose a source of the images
@@ -229,6 +348,7 @@ function ObjectView() {
 	}
 	
 	function addImage(image) {
+		
 		if (!image.height || !image.width){
 			var alert = Ti.UI.createAlertDialog({
 				message:'Das Bild konnte leider nicht importiert werden.',
@@ -236,10 +356,13 @@ function ObjectView() {
 			}).show();
 			return;
 		}
-		var file = ImageFactory.rotateResizeImage(image, 250, 100); //TODO file isn't a image
+		
+		// var file = ImageFactory.rotateResizeImage(image, 250, 100); //TODO file isn't a image
 		// var file = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), 'test.png');
 		// file.write(image);	
-		imagePreview.image = file;
+		
+		imagePreview.image = image;
+		objData.image = image;
 		image = null;
 		file = null;
 	}

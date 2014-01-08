@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -135,7 +135,10 @@ void ModifyScrollViewForKeyboardHeightAndContentHeightWithResponderRect(UIScroll
 
 -(void)configureGestureRecognizer:(UIGestureRecognizer*)gestureRecognizer;
 - (UIGestureRecognizer *)gestureRecognizerForEvent:(NSString *)event;
-
+-(void)handleListenerRemovedWithEvent:(NSString *)event;
+-(void)handleListenerAddedWithEvent:(NSString *)event;
+-(BOOL)proxyHasGestureListeners;
+-(void)ensureGestureListeners;
 /**
  Returns CA layer for the background image of the view.
  */

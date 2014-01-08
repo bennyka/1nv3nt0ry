@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -38,6 +38,11 @@ const NSString *apiEndpoint = @"http://query.yahooapis.com/v1/public/yql?format=
 	RELEASE_TO_NIL(callback);
 	RELEASE_TO_NIL(module);
 	[super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Yahoo";
 }
 
 #pragma mark Delegates

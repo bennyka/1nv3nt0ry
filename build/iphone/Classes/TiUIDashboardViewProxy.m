@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -35,6 +35,11 @@ NSArray* dashboardKeySequence;
         [self setValue:[NSNumber numberWithBool:YES] forUndefinedKey:@"editable"];
     }
     return self;
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.UI.DashboardView";
 }
 
 -(void)startEditing:(id)args

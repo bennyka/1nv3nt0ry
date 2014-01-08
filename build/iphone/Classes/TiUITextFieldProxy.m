@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -43,19 +43,10 @@ DEFINE_DEF_INT_PROP(rightButtonMode,UITextFieldViewModeNever);
 DEFINE_DEF_INT_PROP(appearance,UIKeyboardAppearanceDefault);
 DEFINE_DEF_INT_PROP(autocapitalization,UITextAutocapitalizationTypeNone);
 DEFINE_DEF_INT_PROP(maxLength,-1);
-	
 
--(void)setSelection:(id)arg withObject:(id)property
+-(NSString*)apiName
 {
-    NSInteger start = [TiUtils intValue:arg def: -1];
-    NSInteger end = [TiUtils intValue:property def:-1];
-    UITextField* textField = [ (TiUITextField *) [self view] textWidgetView];
-    NSInteger textLength = [ [textField text] length];
-    if ((start < 0) || (start > textLength) || (end < 0) || (end > textLength)) {
-        DebugLog(@"Invalid range for text selection. Ignoring.");
-        return;
-    }
-    TiThreadPerformOnMainThread(^{[(TiUITextField *)[self view] setSelectionFrom:arg to:property];}, NO);
+    return @"Ti.UI.TextField";
 }
 
 @end

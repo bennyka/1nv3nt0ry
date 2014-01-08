@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -17,7 +17,11 @@
 @property (nonatomic, readonly) NSNumber *sectionCount;
 
 - (TiUIListSectionProxy *)sectionForIndex:(NSUInteger)index;
-
+- (void) deleteSectionAtIndex:(NSUInteger)index;
+- (void) setMarker:(id)args;
 @end
 
+@interface TiUIListViewProxy (internal)
+-(void)willDisplayCell:(NSIndexPath*)indexPath;
+@end
 #endif

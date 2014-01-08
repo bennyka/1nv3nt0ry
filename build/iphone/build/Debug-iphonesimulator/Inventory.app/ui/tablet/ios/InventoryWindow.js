@@ -1,1 +1,1 @@
-/Users/bennyka/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/InventoryWindow.js
+/Users/benjaminkarla/Documents/Titanium_Studio_Workspace/inventory/Resources/ui/tablet/ios/InventoryWindow.js

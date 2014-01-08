@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -53,6 +53,11 @@
 	[super _configure];
 }
 
+-(NSString*)apiName
+{
+    return @"Ti.UI.Tab";
+}
+
 #pragma mark - Private methods
 
 -(void) cleanNavStack:(BOOL)removeTab
@@ -100,12 +105,13 @@
 
 -(void)openOnUIThread:(NSArray*)args
 {
-	if (transitionIsAnimating)
+	if (transitionIsAnimating || transitionWithGesture)
 	{
 		[self performSelector:_cmd withObject:args afterDelay:0.1];
 		return;
 	}
 	TiWindowProxy *window = [args objectAtIndex:0];
+    
 	BOOL animated = ([args count] > 1) ? [TiUtils boolValue:@"animated" properties:[args objectAtIndex:1] def:YES] : YES;
     [controllerStack addObject:[window hostingController]];
     [[[self rootController] navigationController] pushViewController:[window hostingController] animated:animated];
@@ -113,7 +119,7 @@
 
 -(void)closeOnUIThread:(NSArray*)args
 {
-	if (transitionIsAnimating)
+	if (transitionIsAnimating || transitionWithGesture)
 	{
 		[self performSelector:_cmd withObject:args afterDelay:0.1];
 		return;
@@ -166,6 +172,25 @@
     RELEASE_TO_NIL(windowController);
 }
 
+-(void)popGestureStateHandler:(UIGestureRecognizer *)recognizer
+{
+    UIGestureRecognizerState curState = recognizer.state;
+    
+    switch (curState) {
+        case UIGestureRecognizerStateBegan:
+            transitionWithGesture = YES;
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+            transitionWithGesture = NO;
+            break;
+        default:
+            break;
+    }
+    
+}
+
 #pragma mark - TiTab protocol
 -(UINavigationController*)controller
 {
@@ -179,6 +204,9 @@
 		[self setBadge:[self valueForKey:@"badge"]];
 		controllerStack = [[NSMutableArray alloc] init];
 		[controllerStack addObject:[self rootController]];
+		if ([TiUtils isIOS7OrGreater]) {
+			[controller.interactivePopGestureRecognizer addTarget:self action:@selector(popGestureStateHandler:)];
+		}
 	}
 	return controller;
 }
@@ -247,10 +275,28 @@
 
 #pragma mark - UINavigationControllerDelegate
 
+#ifdef USE_TI_UIIOSTRANSITIONANIMATION
+- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                fromViewController:(UIViewController *)fromVC
+                                                  toViewController:(UIViewController *)toVC
+{
+    if([toVC isKindOfClass:[TiViewController class]]) {
+        TiViewController* toViewController = (TiViewController*)toVC;
+        if([[toViewController proxy] isKindOfClass:[TiWindowProxy class]]) {
+            TiWindowProxy *windowProxy = (TiWindowProxy*)[toViewController proxy];
+            return [windowProxy transitionAnimation];
+        }
+    }
+    return nil;
+}
+#endif
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-	transitionIsAnimating = YES;
+	if (!transitionWithGesture) {
+		transitionIsAnimating = YES;
+	}
 	[self handleWillShowViewController:viewController animated:animated];
 }
 
@@ -262,6 +308,7 @@
         [self setActive:[NSNumber numberWithBool:YES]];
     }
 	transitionIsAnimating = NO;
+	transitionWithGesture = NO;
 	[self handleDidShowViewController:viewController animated:animated];
 }
 
@@ -459,7 +506,6 @@
 			activeImage = [[ImageLoader sharedLoader] loadImmediateImage:[TiUtils toURL:activeIcon proxy:currentWindow]];
 		}
 	}
-
 	[rootController setTitle:title];
 	UITabBarItem *ourItem = nil;
     

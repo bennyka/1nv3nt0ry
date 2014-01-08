@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -14,7 +14,9 @@
 #import "TiUITableViewAction.h"
 #import "TiUISearchBarProxy.h"
 #import "TiDimension.h"
-
+#ifdef USE_TI_UIREFRESHCONTROL
+#import "TiUIRefreshControlProxy.h"
+#endif
 @class TiGradientLayer;
 
 // Overloads hilighting to send touchbegin/touchend events
@@ -73,6 +75,10 @@
     TiViewProxy* headerViewProxy;
     TiViewProxy* footerViewProxy;
     BOOL viewWillDetach;
+#ifdef USE_TI_UIREFRESHCONTROL
+    TiUIRefreshControlProxy* _refreshControlProxy;
+#endif
+    UIEdgeInsets defaultSeparatorInsets;
 }
 
 @property (nonatomic, assign) BOOL viewWillDetach;

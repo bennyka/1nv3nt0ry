@@ -2,10 +2,10 @@ var style = {
 	backgroundGradient: {
         type: 'linear',
         startPoint: { x: '0%', y: '0%' }, 
-        endPoint: { x: '0%', y: '100%' },       
+        endPoint: { x: '100%', y: '0%' },       
         colors: [ 
-            { color: '#A6CBFF', offset: 0.0 }, 
-            { color: '#286DD9', offset: 0.5 } 
+            { color: '#7a2f63', offset: 0.0 }, 
+            { color: '#AF6D46', offset: 1.0 } 
         ]
     },
     whiteTransparentBackground:'#33ffffff',

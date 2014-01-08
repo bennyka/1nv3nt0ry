@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -26,9 +26,7 @@
     if (self = [super _initWithPageContext:context]) {
         module= [module_ retain] ;
         calendar = [calendar_ retain];
-        if ([TiUtils isIOS5OrGreater]) {
-            calendarId = [calendar calendarIdentifier];
-        }
+        calendarId = [calendar calendarIdentifier];
     }
         
     return self;
@@ -40,6 +38,11 @@
 	RELEASE_TO_NIL(module);
 	RELEASE_TO_NIL(calendar);
     [super _destroy];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Calendar.Calendar";
 }
 
 

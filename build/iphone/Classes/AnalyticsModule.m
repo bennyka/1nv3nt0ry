@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -77,6 +77,11 @@ NSString * const TI_DB_VERSION = @"1";
 	RELEASE_TO_NIL(lock);
 	[lastEvent release];
 	[super dealloc];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Analytics";
 }
 
 -(void)enqueueBlock:(void (^)(void))block
@@ -474,6 +479,7 @@ NSString * const TI_DB_VERSION = @"1";
 		[enrollment setObject:TI_APPLICATION_NAME forKey:@"app_name"];
 		[enrollment setObject:TI_APPLICATION_DEPLOYTYPE forKey:@"deploytype"];
 		[enrollment setObject:TI_APPLICATION_ID forKey:@"app_id"];
+		[enrollment setObject:TI_APPLICATION_VERSION forKey:@"app_version"];
 		[enrollment setObject:@"iphone" forKey:@"platform"];
 		
 		[self queueEvent:@"ti.enroll" name:@"ti.enroll" data:enrollment immediate:NO];

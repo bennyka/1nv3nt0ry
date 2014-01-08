@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -21,6 +21,8 @@
 	NSMutableArray *_sections;
 	NSMutableArray *_operationQueue;
 	pthread_mutex_t _operationQueueMutex;
+	pthread_rwlock_t _markerLock;
+	NSIndexPath *marker;
 }
 
 - (id)init
@@ -30,15 +32,30 @@
 		_sections = [[NSMutableArray alloc] initWithCapacity:4];
 		_operationQueue = [[NSMutableArray alloc] initWithCapacity:10];
 		pthread_mutex_init(&_operationQueueMutex,NULL);
+		pthread_rwlock_init(&_markerLock,NULL);
     }
     return self;
+}
+
+-(void)_initWithProperties:(NSDictionary *)properties
+{
+    [self initializeProperty:@"canScroll" defaultValue:NUMBOOL(YES)];
+    [self initializeProperty:@"caseInsensitiveSearch" defaultValue:NUMBOOL(YES)];
+    [super _initWithProperties:properties];
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.UI.ListView";
 }
 
 - (void)dealloc
 {
 	[_operationQueue release];
 	pthread_mutex_destroy(&_operationQueueMutex);
+	pthread_rwlock_destroy(&_markerLock);
 	[_sections release];
+	RELEASE_TO_NIL(marker);
     [super dealloc];
 }
 
@@ -53,6 +70,15 @@
 		block(nil);
 		return;
 	}
+    
+    if ([self.listView isSearchActive]) {
+        block(nil);
+        TiThreadPerformOnMainThread(^{
+            [self.listView updateSearchResults:nil];
+        }, NO);
+        return;
+    }
+    
 	BOOL triggerMainThread;
 	pthread_mutex_lock(&_operationQueueMutex);
 	triggerMainThread = [_operationQueue count] == 0;
@@ -131,6 +157,18 @@
 	return nil;
 }
 
+- (void) deleteSectionAtIndex:(NSUInteger)index
+{
+    if ([_sections count] <= index) {
+        DebugLog(@"[WARN] ListViewProxy: Delete section index is out of range");
+        return;
+    }
+    TiUIListSectionProxy *section = [_sections objectAtIndex:index];
+    [_sections removeObjectAtIndex:index];
+    section.delegate = nil;
+    [self forgetProxy:section];
+}
+
 - (NSArray *)keySequence
 {
 	static dispatch_once_t onceToken;
@@ -165,7 +203,7 @@
 		}
 	}];
 	TiThreadPerformOnMainThread(^{
-		[self.listView setTemplates_:templates];
+		[self.listView setDictTemplates_:templates];
 	}, NO);
 	[templates release];
 }
@@ -376,6 +414,71 @@
 		[tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 		[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
 	}];
+}
+
+- (void)deselectItem:(id)args
+{
+	ENSURE_ARG_COUNT(args, 2);
+	NSUInteger sectionIndex = [TiUtils intValue:[args objectAtIndex:0]];
+	NSUInteger itemIndex = [TiUtils intValue:[args objectAtIndex:1]];
+	[self dispatchUpdateAction:^(UITableView *tableView) {
+		if ([_sections count] <= sectionIndex) {
+			DebugLog(@"[WARN] ListView: Select section index is out of range");
+			return;
+		}
+		TiUIListSectionProxy *section = [_sections objectAtIndex:sectionIndex];
+		if (section.itemCount <= itemIndex) {
+			DebugLog(@"[WARN] ListView: Select item index is out of range");
+			return;
+		}
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:itemIndex inSection:sectionIndex];
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}];
+}
+
+-(void)setContentInsets:(id)args
+{
+    id arg1;
+    id arg2;
+    if ([args isKindOfClass:[NSDictionary class]]) {
+        arg1 = args;
+        arg2 = nil;
+    }
+    else {
+        arg1 = [args objectAtIndex:0];
+        arg2 = [args count] > 1 ? [args objectAtIndex:1] : nil;
+    }
+    TiThreadPerformOnMainThread(^{
+        [self.listView setContentInsets_:arg1 withObject:arg2];
+    }, NO);
+}
+
+#pragma mark - Marker Support
+- (void)setMarker:(id)args;
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    pthread_rwlock_wrlock(&_markerLock);
+    int section = [TiUtils intValue:[args objectForKey:@"sectionIndex"] def:NSIntegerMax];
+    int row = [TiUtils intValue:[args objectForKey:@"itemIndex"] def:NSIntegerMax];
+    RELEASE_TO_NIL(marker);
+    marker = [[NSIndexPath indexPathForRow:row inSection:section] retain];
+    pthread_rwlock_unlock(&_markerLock);
+}
+
+-(void)willDisplayCell:(NSIndexPath*)indexPath
+{
+    if ((marker != nil) && [self _hasListeners:@"marker"]) {
+        //Never block the UI thread
+        int result = pthread_rwlock_tryrdlock(&_markerLock);
+        if (result != 0) {
+            return;
+        }
+        if ( (indexPath.section > marker.section) || ( (marker.section == indexPath.section) && (indexPath.row >= marker.row) ) ){
+            [self fireEvent:@"marker" withObject:nil withSource:self propagate:NO reportSuccess:NO errorCode:0 message:nil];
+            RELEASE_TO_NIL(marker);
+        }
+        pthread_rwlock_unlock(&_markerLock);
+    }
 }
 
 DEFINE_DEF_BOOL_PROP(willScrollOnStatusTap,YES);

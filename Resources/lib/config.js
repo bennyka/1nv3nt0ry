@@ -5,9 +5,9 @@ var osname = Ti.Platform.osname,
 	version = Ti.Platform.version,
 	height = Ti.Platform.displayCaps.platformHeight,
 	width = Ti.Platform.displayCaps.platformWidth;
-
+var screensize = require('lib/Screensize');
 var config = {
-	isTablet: osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899))
+	isTablet: screensize.isTablet()
 };
 
 if (config.isTablet) {

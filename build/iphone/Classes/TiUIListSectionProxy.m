@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -44,11 +44,17 @@
 	[super dealloc];
 }
 
+-(NSString*)apiName
+{
+    return @"Ti.UI.ListSection";
+}
+
 - (id<TiUIListViewDelegate>)dispatcher
 {
 	return _delegate != nil ? _delegate : self;
 }
 
+// These API's are used by the ListView directly. Not for public consumption
 - (NSDictionary *)itemAtIndex:(NSUInteger)index
 {
 	if (index < [_items count]) {
@@ -59,6 +65,30 @@
 	}
 	return nil;
 }
+
+- (void) deleteItemAtIndex:(NSUInteger)index
+{
+    if ([_items count] <= index) {
+        DebugLog(@"[WARN] ListSectionProxy: deleteItemAtIndex index is out of range");
+    } else {
+        [_items removeObjectAtIndex:index];
+    }
+}
+
+- (void) addItem:(NSDictionary*)item atIndex:(NSUInteger)index
+{
+    if (index > [_items count]) {
+        DebugLog(@"[WARN] ListSectionProxy: addItem:atIndex: index is out of range");
+    } else {
+        if (index == [_items count]) {
+            [_items addObject:item];
+        } else {
+            [_items insertObject:item atIndex:index];
+        }
+    }
+}
+
+
 
 #pragma mark - Public API
 

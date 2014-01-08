@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -63,6 +63,9 @@
 #ifdef USE_TI_UIIPHONELISTVIEWCELLSELECTIONSTYLE
 	TiProxy *listViewCellSelectionStyle;
 #endif
+#ifdef USE_TI_UIIPHONELISTVIEWSEPARATORSTYLE
+	TiProxy *listViewSeparatorStyle;
+#endif
 }
 
 #ifdef USE_TI_UIIPHONEANIMATIONSTYLE
@@ -116,10 +119,13 @@
 #ifdef USE_TI_UIIPHONELISTVIEWCELLSELECTIONSTYLE
 @property(nonatomic,readonly) TiProxy* ListViewCellSelectionStyle;
 #endif
+#ifdef USE_TI_UIIPHONELISTVIEWSEPARATORSTYLE
+@property(nonatomic,readonly) TiProxy* ListViewSeparatorStyle;
+#endif
 
 
-@property(nonatomic,readwrite,assign)	NSNumber *statusBarHidden;
-@property(nonatomic,readwrite,assign)	NSNumber *statusBarStyle;
+@property(nonatomic,readonly)	NSNumber *statusBarHidden;
+@property(nonatomic,readonly)	NSNumber *statusBarStyle;
 @property(nonatomic,readwrite,assign)	NSNumber *appBadge;
 @property(nonatomic,readwrite,assign)	NSNumber *appSupportsShakeToEdit;
 
@@ -133,15 +139,6 @@
 @property(nonatomic,readonly) NSNumber *MODAL_PRESENTATION_PAGESHEET;
 @property(nonatomic,readonly) NSNumber *MODAL_PRESENTATION_FORMSHEET;
 @property(nonatomic,readonly) NSNumber *MODAL_PRESENTATION_CURRENT_CONTEXT;
-
-
--(void)hideStatusBar:(id)args;
--(void)showStatusBar:(id)args;
-
-#ifdef USE_TI_UIIPHONENAVIGATIONGROUP
--(id)createNavigationGroup:(id)args;
-#endif
-
 
 @end
 

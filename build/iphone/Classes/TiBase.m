@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -145,7 +145,15 @@ NSString * const kTiAnalyticsNotification = @"TiAnalytics";
 NSString * const kTiRemoteDeviceUUIDNotification = @"TiDeviceUUID";
 NSString * const kTiGestureShakeNotification = @"TiGestureShake";
 NSString * const kTiRemoteControlNotification = @"TiRemoteControl";
-
+NSString * const kTiBackgroundFetchNotification = @"TiBackgroundFetch";
+NSString * const kTiSilentPushNotification = @"TiSilentPush";
+NSString * const kTiBackgroundTransfer = @"TiBackgroundTransfer";
+NSString * const kTiURLDownloadFinished = @"TiDownloadFinished";
+NSString * const kTiURLSessionCompleted = @"TiSessionCompleted";
+NSString * const kTiURLSessionEventsCompleted = @"TiSessionEventsCompleted";
+NSString * const kTiURLDowloadProgress = @"TiDownloadProgress";
+NSString * const kTiURLUploadProgress = @"TiUploadProgress";
+NSString * const kTiFrameAdjustNotification = @"TiFrameAdjust";
 NSString * const kTiLocalNotification = @"TiLocalNotification";
 
 NSString* const kTiBehaviorSize = @"SIZE";

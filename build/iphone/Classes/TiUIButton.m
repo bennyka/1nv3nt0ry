@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -306,6 +306,34 @@
 			[b setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 		}
 	}
+}
+
+-(void)setDisabledColor_:(id)color
+{
+    if (color!=nil) {
+        TiColor *selColor = [TiUtils colorValue:color];
+        UIButton *b = [self button];
+        if (selColor!=nil) {
+            [b setTitleColor:[selColor _color] forState:UIControlStateDisabled];
+        }
+    }
+}
+
+-(void)setShadowColor_:(id)color
+{
+    if (color==nil) {
+        [[self button] setTitleShadowColor:nil forState:UIControlStateNormal];
+    } else {
+        color = [TiUtils colorValue:color];
+        [[self button] setTitleShadowColor:[color color] forState:UIControlStateNormal];
+    }
+}
+
+-(void)setShadowOffset_:(id)value
+{
+	CGPoint p = [TiUtils pointValue:value];
+	CGSize size = {p.x,p.y};
+	[[[self button] titleLabel] setShadowOffset:size];
 }
 
 -(void)setTextAlign_:(id)align

@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -34,6 +34,11 @@ static void SetEventOverrideDelegateRecursive(NSArray *children, id<TiViewEventO
 		self.modelDelegate = self;
     }
     return self;
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.UI.ListItem";
 }
 
 - (id)init
@@ -77,10 +82,6 @@ static void SetEventOverrideDelegateRecursive(NSArray *children, id<TiViewEventO
 		TiThreadPerformOnMainThread(^{
 			_listItem.accessoryType = [TiUtils intValue:newValue def:UITableViewCellAccessoryNone];
 		}, YES);
-	} else if ([key isEqualToString:@"backgroundColor"]) {
-		TiThreadPerformOnMainThread(^{
-			_listItem.contentView.backgroundColor = [[TiUtils colorValue:newValue] _color];
-		}, YES);
 	} else if ([key isEqualToString:@"selectionStyle"]) {
 		TiThreadPerformOnMainThread(^{
 			_listItem.selectionStyle = [TiUtils intValue:newValue def:UITableViewCellSelectionStyleBlue];
@@ -92,6 +93,11 @@ static void SetEventOverrideDelegateRecursive(NSArray *children, id<TiViewEventO
 {
 	[super unarchiveFromTemplate:viewTemplate];
 	SetEventOverrideDelegateRecursive(self.children, self);
+}
+
+-(BOOL)canHaveControllerParent
+{
+	return NO;
 }
 
 #pragma mark - TiViewEventOverrideDelegate

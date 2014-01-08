@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -33,6 +33,11 @@
     [super _destroy];
 }
 
+-(NSString*)apiName
+{
+    return @"Ti.Calendar.Alert";
+}
+
 -(EKAlarm*)alert
 {
     return alert;
@@ -45,7 +50,7 @@
 
 -(NSNumber*)relativeOffset
 {
-    return NUMINT([self alert].relativeOffset * 1000) ;
+    return NUMDOUBLE([self alert].relativeOffset * 1000) ;
 }
 
 

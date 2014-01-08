@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2009-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2009-2014 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  * 
@@ -38,6 +38,11 @@ static NSString *const MIMETYPE_JPEG = @"image/jpeg";
 		return @"[object TiBlob]";
 	}
 	return text;
+}
+
+-(NSString*)apiName
+{
+    return @"Ti.Blob";
 }
 
 -(BOOL)isImageMimeType
@@ -295,7 +300,7 @@ static NSString *const MIMETYPE_JPEG = @"image/jpeg";
 	}
 	if (writeData!=nil)
 	{
-		[writeData writeToFile:destination atomically:YES];
+		return [writeData writeToFile:destination atomically:YES];
 	}
 	return NO;
 }
