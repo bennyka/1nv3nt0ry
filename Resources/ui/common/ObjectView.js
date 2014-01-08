@@ -80,12 +80,6 @@ function ObjectView(data) {
 	});
 	self.add(areaBottom);
 	var inputField = [
-		// {
-			// id:"invoice",
-			// width:200,
-			// type:'button',
-			// title:L('addInvoice')
-		// }
 		{
 			id:"serial",
 			width:'50%',
@@ -190,32 +184,45 @@ function ObjectView(data) {
 			case "dropdown":
 				// create picker of dropdown menu
 				break;
-			case "button":
-				// create button
-				var button = Ti.UI.createButton({
-					title:inputField[i].title,
-					top:(20 + 50)*i,
-					height:35,
-					left:10,
-					width:inputField[i].width,
-					borderColor:'#ffffff',
-					borderWidth:1,
-					id:inputField[i].id
-				});
-				areaBottom.add(button);
-				
-				button.addEventListener("click", addPhoto);
-				break;
 		}
 	}
+	// ++++++++++++++IMG CONTAINER++++++++++++++
+	
+	var invoiceContainer = Ti.UI.createImageView({
+		image:'/images/invoice.png',
+		width:64,
+		height:120,
+		bottom:20,
+		center:{x:'75%'},
+		type:"invoice"
+	});
+	areaBottom.add(invoiceContainer);
+	invoiceContainer.addEventListener("singletap", addPhoto);
+	
+	var invoiceStatus = Ti.UI.createButton({
+		height:50,
+		width:50,
+		bottom:0,
+		center:{x:'50%'},
+		title: '\uE198',
+		backgroundColor:'transparent',
+		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+		color: 'red',
+		selectedColor: '#994c616e',
+		font: {fontFamily: 'GLYPHICONS', fontSize: '24sp'}
+	});
+	invoiceContainer.add(invoiceStatus);
+	
 	// ++++++++++++++IMG CONTAINER++++++++++++++
 	var imageContainer = Ti.UI.createView({
 		height:170,
 		width:170,
 		top:0,
-		center:{x:'50%'}
+		center:{x:'50%'},
+		type:"object"
 	});
 	areaBottom.add(imageContainer);
+	imageContainer.addEventListener("singletap", addPhoto);
 	
 	var imagePreview = Ti.UI.createImageView({
 		image:(editMode) ? data.image : null,
@@ -251,10 +258,11 @@ function ObjectView(data) {
 	 * shows dialog to choose a source of the images
 	 * camera or library
 	 */
-	function addPhoto () {		
+	function addPhoto (e) {	
 		var options = Ti.UI.createAlertDialog({
-			title:L('chooseImageSource','Bitte Bildquelle auswählen'),
-			buttonNames: [L('Library', 'Bibliothek'), L('Camera', 'Kamera'), L('Cancel','Abbrechen')]
+			title:(e.source.type == "invoice") ? L('chooseImageSource','Bitte Bildquelle für die Rechnung auswählen') : L('chooseImageSource','Bitte Bildquelle auswählen'),
+			buttonNames: [L('Library', 'Bibliothek'), L('Camera', 'Kamera'), L('Cancel','Abbrechen')],
+			type:e.source.type
 		});
 		options.show();
 		options.addEventListener("click", addPhotoDialogHandler);
@@ -276,7 +284,11 @@ function ObjectView(data) {
 				if (Ti.Platform.osname != "android"){
 					Ti.Media.showCamera({
 						success : function(event) {
-							addImage(event.media);
+							var obj = {
+								image:event.media,
+								type:e.source.type
+							};
+							addImage(obj);
 							win.close();
 						},
 						cancel: function () {
@@ -292,7 +304,11 @@ function ObjectView(data) {
 				} else {
 					Ti.Media.showCamera({
 						success : function(event) {
-							addImage(event.media);
+							var obj = {
+								image:event.media,
+								type:e.source.type
+							};
+							addImage(obj);
 							win.close();
 						},
 						cancel: function () {
@@ -309,7 +325,11 @@ function ObjectView(data) {
 				if (Ti.Platform.osname != "android"){
 					Ti.Media.openPhotoGallery({
 						success : function(event) {
-							addImage(event.media);
+							var obj = {
+								image:event.media,
+								type:e.source.type
+							};
+							addImage(obj);
 							win.close();
 						},
 						cancel: function () {
@@ -324,7 +344,11 @@ function ObjectView(data) {
 				} else {
 					Ti.Media.openPhotoGallery({
 						success : function(event) {
-							addImage(event.media);
+							var obj = {
+								image:event.media,
+								type:e.source.type
+							};
+							addImage(obj);
 							win.close();
 						},
 						cancel: function () {
@@ -347,24 +371,32 @@ function ObjectView(data) {
 		win.open();
 	}
 	
-	function addImage(image) {
+	function addImage(obj) {
 		
-		if (!image.height || !image.width){
-			var alert = Ti.UI.createAlertDialog({
-				message:'Das Bild konnte leider nicht importiert werden.',
-				buttonNames:['Ok']
-			}).show();
-			return;
-		}
+		// if (!obj.image.height || !obj.image.width){
+			// var alert = Ti.UI.createAlertDialog({
+				// message:'Das Bild konnte leider nicht importiert werden.',
+				// buttonNames:['Ok']
+			// }).show();
+			// return;
+		// }
 		
 		// var file = ImageFactory.rotateResizeImage(image, 250, 100); //TODO file isn't a image
 		// var file = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), 'test.png');
 		// file.write(image);	
 		
-		imagePreview.image = image;
-		objData.image = image;
-		image = null;
-		file = null;
+
+		if (obj.type == "invoice"){
+			invoiceStatus.title = '\uE199';
+			invoiceStatus.color = 'green';
+			objData.imageInvoice = image;
+			
+		} else {
+			imagePreview.image = obj.image;
+			objData.image = image;
+		}
+		obj.image = null;
+		obj.file = null;
 	}
 	
 	return self;

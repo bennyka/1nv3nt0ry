@@ -1,5 +1,0 @@
-"C:/Users/Benjamin/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/ApplicationStylesheet.java"
-"C:/Users/Benjamin/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryActivity.java"
-"C:/Users/Benjamin/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryAppInfo.java"
-"C:/Users/Benjamin/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/InventoryApplication.java"
-"C:/Users/Benjamin/Documents/Titanium_Studio_Workspace/inventory/build/android/gen/de/bk/inventory/R.java"
