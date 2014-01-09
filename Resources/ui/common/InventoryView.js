@@ -43,7 +43,6 @@ function InventoryView() {
 	
 	// ++++++++++++++REST OF PAGE++++++++++++++
 	function createInventoryEntry(entry){
-		alert("createInventoryEntry: "+entry);
 		var objectContainer = Ti.UI.createView({
 			height:150,
 		});
@@ -235,7 +234,6 @@ function InventoryView() {
 		}
 	}
 	createInventoryList();
-	
 	
 	return self;
 };

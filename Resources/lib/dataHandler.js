@@ -21,7 +21,6 @@ if( !objectFolder.exists() ){
 var generalDir = (Ti.Platform.getOsname() != "android") ? Ti.Filesystem.applicationDataDirectory : Ti.Filesystem.externalStorageDirectory;
 
 function saveData(data){
-	
 	for (i in masterList){
 		if (data.id == masterList[i]){
 			Ti.API.log("Object already exists");

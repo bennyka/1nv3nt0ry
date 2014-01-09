@@ -12,7 +12,9 @@ function ObjectView(data) {
 	if (!editMode){
 		// set date
 		var currentdate = new Date();
-		objData.date = currentdate.getDate()+"."+(currentdate.getMonth()+1)+"."+currentdate.getFullYear(); 
+		var date = (currentdate.getDate() < 10) ? "0"+currentdate.getDate() : currentdate.getDate();
+		var month = ((currentdate.getMonth()+1) < 10) ? "0"+(currentdate.getMonth()+1) : (currentdate.getMonth()+1);
+		objData.date = date+"."+month+"."+currentdate.getFullYear(); 
 		// set id
 		var timestamp = new Date().getTime();
 		objData.id = timestamp;
@@ -100,21 +102,21 @@ function ObjectView(data) {
 	var inputField = [
 		{
 			id:"serial",
-			width:'50%',
+			width:'60%',
 			type:'textfield',
 			hintText:L('Serial','Seriennummer')+"...",
 			title:L('Serial','Seriennummer')
 		},
 		{
 			id:"category",
-			width:'50%',
+			width:'60%',
 			type:'textfield',
 			hintText:L('Category','Kategorie')+"...",
 			title:L('Category','Kategorie')
 		},
 		{
 			id:"brand",
-			width:'50%',
+			width:'60%',
 			type:'textfield',
 			hintText:L('Brand','Marke')+"...",
 			title:L('Brand','Marke'),
@@ -140,7 +142,7 @@ function ObjectView(data) {
 				// create standard textfield
 				var textfield = Ti.UI.createTextField({
 					bottom:(20 + (50*i)),
-					left:10,
+					left:"10%",
 					width:inputField[i].width,
 					paddingLeft:4,
 					paddingRight:4,
@@ -167,7 +169,7 @@ function ObjectView(data) {
 						case 'category':
 							objData.category = e.value;
 							break;
-					}
+					};
 				});
 				
 				if (editMode) {
@@ -199,19 +201,16 @@ function ObjectView(data) {
 				areaBottom.add(textfieldTitle);
 				
 				break;
-			case "dropdown":
-				// create picker of dropdown menu
-				break;
 		}
 	}
 	// ++++++++++++++IMG CONTAINER++++++++++++++
 	
-	var invoiceContainer = Ti.UI.createImageView({
-		image:'/images/invoice.png',
+	var invoiceContainer = Ti.UI.createView({
+		backgroundImage:'/images/invoice.png',
 		width:64,
 		height:120,
 		bottom:20,
-		center:{x:'75%'},
+		right:'11%',
 		type:"invoice"
 	});
 	areaBottom.add(invoiceContainer);
@@ -227,33 +226,63 @@ function ObjectView(data) {
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 		color: 'red',
 		selectedColor: '#994c616e',
-		font: {fontFamily: style.iconFontFamily, fontSize: '24sp'}
+		font: {fontFamily: style.iconFontFamily, fontSize: '20sp'}
 	});
 	invoiceContainer.add(invoiceStatus);
 	
+	// invoice label
+	var transform = Ti.UI.create2DMatrix();
+	transform = transform.rotate(90);
+	var rotate = Titanium.UI.createAnimation();
+	rotate.transform = transform;
+	
+	var invoiceLabel = Ti.UI.createLabel({
+		text:L('Invoice upload','Rechnung einfügen'),
+		font: {fontSize: '12sp'}
+	}).toImage();
+	
+	var invoiceImg = Ti.UI.createImageView({
+		image:invoiceLabel,
+		right:-80,
+		bottom:120,
+		visible:false
+	});
+	
+	areaBottom.add(invoiceImg);
+	
+	invoiceImg.animate(rotate);
+	invoiceImg.visible = true;
 	// ++++++++++++++IMG CONTAINER++++++++++++++
 	var imageContainer = Ti.UI.createView({
-		height:170,
-		width:170,
+		height:200,
+		width:200,
 		top:0,
-		center:{x:'50%'},
-		type:"object"
+		center:{x:'50%'}
 	});
 	areaBottom.add(imageContainer);
-	imageContainer.addEventListener("singletap", addPhoto);
-	
+
 	var imagePreview = Ti.UI.createImageView({
-		image:(editMode) ? data.image : null,
+		image:(editMode) ? data.imagePath : null,
 		backgroundColor:style.whiteTransparentBackground,
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 120 : 60,
-		borderWidth:3,
-		borderColor:'#ffffff',
 		width:120,
 		height:120,
-		center:{x:'50%',y:'50%'}
+		center:{x:'50%',y:'50%'},
+		type:"object"
 	});
 	imageContainer.add(imagePreview);
 	imagePreview.addEventListener("singletap", addPhoto);
+	
+	var imagePreviewBorder = Ti.UI.createView({
+		borderRadius:(Ti.Platform.getOsname() == "android") ? 150 : 75,
+		borderWidth:3,
+		borderColor:'#ffffff',
+		width:150,
+		height:150,
+		touchEnabled:false,
+		center:{x:'50%',y:'50%'}
+	});
+	imageContainer.add(imagePreviewBorder);
 	
 	var addIcon = Titanium.UI.createButton({
 		top:5,
@@ -394,7 +423,7 @@ function ObjectView(data) {
 		if (obj.type == "invoice"){
 			invoiceStatus.title = '\uE199';
 			invoiceStatus.color = 'green';
-			objData.imageInvoice = image;	
+			objData.imageInvoice = obj.image;	
 		} else {
 			imagePreview.image = obj.image;
 			objData.image = obj.image;
