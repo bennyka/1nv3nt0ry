@@ -6,7 +6,8 @@ function StartWindow() {
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
 		orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],
-		navBarHidden: true
+		navBarHidden: true,
+		exitOnClose:true
 	});
 		
 	//construct UI

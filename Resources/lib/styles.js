@@ -9,6 +9,6 @@ var style = {
         ]
     },
     whiteTransparentBackground:'#33ffffff',
-    specialFontFamily:(Ti.Platform.getOsname() != "android") ? "Honey Script" : "HoneyScript-Light"
-    
+    specialFontFamily:(Ti.Platform.getOsname() != "android") ? "Honey Script" : "HoneyScript-Light",
+    iconFontFamily:(Ti.Platform.getOsname() != "android" ) ? "GLYPHICONS" : "glyphicons-regular"
 };

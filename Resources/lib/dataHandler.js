@@ -18,7 +18,7 @@ if( !objectFolder.exists() ){
   objectFolder.createDirectory();
 }
 
-var generalDir = (Ti.Platform.getOsname() != "android") ? Ti.Filesystem.applicationDataDirectory : Ti.Filesystem.resourcesDirectory;
+var generalDir = (Ti.Platform.getOsname() != "android") ? Ti.Filesystem.applicationDataDirectory : Ti.Filesystem.externalStorageDirectory;
 
 function saveData(data){
 	
@@ -37,6 +37,13 @@ function saveData(data){
 				file.createFile();
 			};
 			file.write(data.image);
+		}
+		if (data.imageInvoice){
+			var file = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
+			if (!file.exists() && Ti.Platform.getOsname() != "android"){
+				file.createFile();
+			};
+			file.write(data.imageInvoice);
 		}
 		
 		var file = Ti.Filesystem.getFile(generalDir, data.id+'.txt');
@@ -73,7 +80,7 @@ function loadData(){
 				var image = Ti.Filesystem.getFile(generalDir, masterList[i]+'.png');
 				if (image.exists()){
 					dataObj.imagePath = image.nativePath;
-				};				
+				};			
 				itemList.push(dataObj);
 			}
 		}

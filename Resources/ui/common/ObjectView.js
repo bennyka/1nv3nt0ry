@@ -44,16 +44,34 @@ function ObjectView(data) {
 		});
 		areaTop.add(btnBack);
 	}
-	
-	var btnSave = Ti.UI.createButton({
-		title:L(' save ',' speichern '),
-		top:25,
-		right:5,
-		color:'#ffffff',
-		borderColor:'#ffffff',
-		borderWidth:1,
-		borderRadius:5
-	});
+	if (Ti.Platform.getOsname() != "android"){
+		var btnSave = Ti.UI.createButton({
+			title:L(' save ',' speichern '),
+			top:25,
+			right:5,
+			color:'#ffffff',
+			borderColor:'#ffffff',
+			borderWidth:1,
+			borderRadius:5
+		});
+	} else {
+		
+		var btnSave = Ti.UI.createView({
+			top:25,
+			width:Ti.UI.SIZE,
+			height:35,
+			right:10,
+			color:'#ffffff',
+			borderColor:'#ffffff',
+			borderWidth:1,
+			borderRadius:10
+		});
+		var btnSaveTitle = Ti.UI.createLabel({
+			text:L(' save ',' speichern '),
+			center:{x:'50%',y:'50%'}
+		});
+		btnSave.add(btnSaveTitle);
+	}
 	btnSave.addEventListener("click", function(){
 		if (editMode){
 			updateData(data);
@@ -209,7 +227,7 @@ function ObjectView(data) {
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 		color: 'red',
 		selectedColor: '#994c616e',
-		font: {fontFamily: 'GLYPHICONS', fontSize: '24sp'}
+		font: {fontFamily: style.iconFontFamily, fontSize: '24sp'}
 	});
 	invoiceContainer.add(invoiceStatus);
 	
@@ -247,7 +265,7 @@ function ObjectView(data) {
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 		color: '#ffffff',
 		selectedColor: '#994c616e',
-		font: {fontFamily: 'GLYPHICONS', fontSize: '24sp'},
+		font: {fontFamily: style.iconFontFamily, fontSize: '24sp'},
 	});
 	imageContainer.add(addIcon);
 	addIcon.addEventListener("singletap", addPhoto);	
@@ -372,28 +390,14 @@ function ObjectView(data) {
 	}
 	
 	function addImage(obj) {
-		
-		// if (!obj.image.height || !obj.image.width){
-			// var alert = Ti.UI.createAlertDialog({
-				// message:'Das Bild konnte leider nicht importiert werden.',
-				// buttonNames:['Ok']
-			// }).show();
-			// return;
-		// }
-		
-		// var file = ImageFactory.rotateResizeImage(image, 250, 100); //TODO file isn't a image
-		// var file = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), 'test.png');
-		// file.write(image);	
-		
-
+		//@TODO: check if image has height and width
 		if (obj.type == "invoice"){
 			invoiceStatus.title = '\uE199';
 			invoiceStatus.color = 'green';
-			objData.imageInvoice = image;
-			
+			objData.imageInvoice = image;	
 		} else {
 			imagePreview.image = obj.image;
-			objData.image = image;
+			objData.image = obj.image;
 		}
 		obj.image = null;
 		obj.file = null;

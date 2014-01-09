@@ -6,7 +6,8 @@ function StartWindow(data) {
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
 		modal: true,
-		navBarHidden: true
+		navBarHidden: true,
+		exitOnClose:true
 	});
 		
 	//construct UI

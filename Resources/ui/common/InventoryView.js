@@ -43,6 +43,7 @@ function InventoryView() {
 	
 	// ++++++++++++++REST OF PAGE++++++++++++++
 	function createInventoryEntry(entry){
+		alert("createInventoryEntry: "+entry);
 		var objectContainer = Ti.UI.createView({
 			height:150,
 		});
@@ -55,8 +56,8 @@ function InventoryView() {
 		objectContainer.add(background1);
 		
 		var entryName = Ti.UI.createLabel({
-			top:3,
-			height:15,
+			top:2,
+			height:Ti.UI.SIZE,
 			left:"40%",
 			text:entry.description,
 			color:'#ffffff',
@@ -66,7 +67,7 @@ function InventoryView() {
 		
 		var entryCreationDate = Ti.UI.createLabel({
 			bottom:entryName.top,
-			height:15,
+			height:Ti.UI.SIZE,
 			left:"40%",
 			text:L('created at '+entry.date,'erstellt am '+entry.date),
 			color:'#ffffff',
@@ -83,8 +84,8 @@ function InventoryView() {
 		objectContainer.add(background2);
 		
 		var entryCategory = Ti.UI.createLabel({
-			top:5,
-			height:15,
+			top:4,
+			height:Ti.UI.SIZE,
 			left:"40%",
 			text:L('Category: '+entry.category,'Kategorie: '+entry.category),
 			color:'#ffffff',
@@ -94,7 +95,7 @@ function InventoryView() {
 		
 		var entryBrand = Ti.UI.createLabel({
 			bottom:entryCategory.top,
-			height:15,
+			height:Ti.UI.SIZE,
 			left:"40%",
 			text:L('Brand: '+entry.brand,'Marke: '+entry.brand),
 			color:'#ffffff',
@@ -102,7 +103,6 @@ function InventoryView() {
 		});
 		background2.add(entryBrand);
 		// ++++++++++++++Bild++++++++++++++
-		
 		var entryImage = Ti.UI.createImageView({
 			top:8,
 			left:18,
@@ -146,7 +146,7 @@ function InventoryView() {
 			color: '#ffffff',
 			selectedColor: '#994c616e',
 			objId:entry.id,
-			font: {fontFamily: 'GLYPHICONS', fontSize: '11sp'},
+			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'}
 			
 		});
 		background3.add(btnDelete);
@@ -176,7 +176,7 @@ function InventoryView() {
 			color: '#ffffff',
 			objData:entry,
 			selectedColor: '#994c616e',
-			font: {fontFamily: 'GLYPHICONS', fontSize: '11sp'},
+			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'},
 			
 		});
 		background3.add(btnEdit);
@@ -194,7 +194,7 @@ function InventoryView() {
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
 			selectedColor: '#994c616e',
-			font: {fontFamily: 'GLYPHICONS', fontSize: '11sp'},
+			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'},
 			
 		});
 		background3.add(btnSend);
@@ -228,9 +228,9 @@ function InventoryView() {
 		};
 		
 		var entrys = loadData();
-		// alert(entrys);
 		for (i in entrys){
 			var entry = createInventoryEntry(entrys[i]);
+			
 			inventoryList.add(entry);
 		}
 	}
