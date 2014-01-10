@@ -32,14 +32,16 @@ function StartView() {
 	});
 	self.add(areaBtnLeft);
 	
-	var btnInventory = Ti.UI.createView({
-		borderColor:'#ffffff',
+	var btnInventory = Ti.UI.createButton({
+		title: '\uE115',
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
+		borderColor:'#ffffff',
 		height:100,
 		width:100,
 		center:{x:'50%',y:'50%'},
 		zIndex:100,
-		backgroundColor:'#66ffffff'
+		backgroundColor:'#66ffffff',
+		font: {fontFamily: style.iconFontFamily, fontSize: '40sp'}
 	});
 	areaBtnLeft.add(btnInventory);
 
@@ -80,14 +82,16 @@ function StartView() {
 	});
 	self.add(areaBtnRight);
 	
-	var btnObject = Ti.UI.createView({
+	var btnObject = Ti.UI.createButton({
+		title: '\u002B',
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
 		borderColor:'#ffffff',
 		height:100,
 		width:100,
 		center:{x:'50%',y:'50%'},
 		zIndex:100,
-		backgroundColor:'#66ffffff'
+		backgroundColor:'#66ffffff',
+		font: {fontFamily: style.iconFontFamily, fontSize: '40sp'}
 	});
 	areaBtnRight.add(btnObject);
 	
@@ -136,7 +140,7 @@ function StartView() {
 	});
 	areaBottom.add(btnLine);
 	
-	var btnImpressum = Ti.UI.createView({
+	var btnImprint = Ti.UI.createView({
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 120 : 60,
 		height:120,
 		width:120,
@@ -144,22 +148,23 @@ function StartView() {
 		bottom:-60,
 		center:{x:'50%'}
 	});
-	areaBottom.add(btnImpressum);
+	areaBottom.add(btnImprint);
 	
-	btnImpressum.addEventListener("singletap", function(){
-		// var ImprintView = require(Ti.App.config.windowPath + 'ImprintWindow');
-		// var imprintView = new ImprintView();
-		// imprintView.open();
+	btnImprint.addEventListener("click", function(){
+		var ImprintView = require(Ti.App.config.windowPath + 'ImprintWindow');
+		var imprintView = new ImprintView();
+		imprintView.open();
 	});
 	
-	var btnImpressumTitle = Ti.UI.createLabel({
+	var btnImprintTitle = Ti.UI.createLabel({
 		text:L('Impressum','Impressum'),
 		center:{x:'50%'},	
 		font:{fontFamily:style.specialFontFamily,fontSize:"30sp"},
 		color:'#ffffff',
+		touchEnabled:false,
 		bottom:2
 	});
-	areaBottom.add(btnImpressumTitle);
+	areaBottom.add(btnImprintTitle);
 	return self;
 };
 

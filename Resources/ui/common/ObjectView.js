@@ -47,35 +47,36 @@ function ObjectView(data) {
 		});
 		areaTop.add(btnBack);
 	}
-	if (Ti.Platform.getOsname() != "android"){
-		var btnSave = Ti.UI.createButton({
-			title:L(' save ',' speichern '),
-			top:25,
-			right:5,
-			color:'#ffffff',
-			borderColor:'#ffffff',
-			borderWidth:1,
-			borderRadius:5
-		});
-	} else {
-		
-		var btnSave = Ti.UI.createView({
-			top:25,
-			width:Ti.UI.SIZE,
-			height:35,
-			right:10,
-			color:'#ffffff',
-			borderColor:'#ffffff',
-			borderWidth:1,
-			borderRadius:10
-		});
-		var btnSaveTitle = Ti.UI.createLabel({
-			text:L(' save ',' speichern '),
-			center:{x:'50%',y:'50%'}
-		});
-		btnSave.add(btnSaveTitle);
-	}
+
+	var btnSave = Ti.UI.createView({
+		top:15,
+		right:10,
+		width:65,
+		height:35,
+		borderColor:'#ffffff',
+		borderWidth:1,
+		borderRadius:5,
+		color:'#ffffff',
+		backgroundImage:'transparent',
+		zIndex:10
+	});
+	
+	var btnSaveTitle = Ti.UI.createLabel({
+		text: 'save',
+		touchEnabled:false,
+		center:{x:'50%',y:'50%'}
+	});
+	btnSave.add(btnSaveTitle);
 	btnSave.addEventListener("click", function(){
+		if (!objData || !objData.description){
+			var dialog = Ti.UI.createAlertDialog({
+				title:'Hinweis',
+				message:'Bitte geben Sie eine Bezeichnung ein',
+				ok: 'Okay'
+			});
+			dialog.show();
+			return;
+		}
 		if (editMode){
 			updateData(data);
 		} else {
@@ -93,7 +94,7 @@ function ObjectView(data) {
 	});
 	areaTop.add(headline);
 	// ++++++++++++++BOTTOM++++++++++++++
-	var areaBottom= Ti.UI.createView({
+	var areaBottom = Ti.UI.createView({
 		bottom:0,
 		left:0,
 		height:"75%",
@@ -155,20 +156,22 @@ function ObjectView(data) {
 					font: {fontFamily: 'Helvetica Neue', fontSize:"13sp", color:'#000000'}		
 				});
 				areaBottom.add(textfield);
-				
+				setTimeout(function(){
+					textfield.blur();
+				},200);
 				textfield.addEventListener("blur", function(e){
 					switch(e.source.id){
 						case 'serial':
-							objData.serial = e.value;
+							objData.serial = (e.value) ? e.value : null;
 							break;
 						case 'brand':
-							objData.brand = e.value;
+							objData.brand = (e.value) ? e.value : null;
 							break;
 						case 'description':
-							objData.description = e.value;
+							objData.description = (e.value) ? e.value : null;
 							break;
 						case 'category':
-							objData.category = e.value;
+							objData.category = (e.value) ? e.value : null;
 							break;
 					};
 				});
@@ -255,8 +258,8 @@ function ObjectView(data) {
 	invoiceImg.visible = true;
 	// ++++++++++++++IMG CONTAINER++++++++++++++
 	var imageContainer = Ti.UI.createView({
-		height:"170dp",
-		width:"170dp",
+		height:170,
+		width:170,
 		top:0,
 		center:{x:'50%'}
 	});
@@ -265,9 +268,9 @@ function ObjectView(data) {
 	var imagePreview = Ti.UI.createImageView({
 		image:(editMode) ? data.imagePath : null,
 		backgroundColor:style.whiteTransparentBackground,
-		borderRadius:(Ti.Platform.getOsname() == "android") ? "100dp" : "50dp",
-		width:"100dp",
-		height:"100dp",
+		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
+		width:100,
+		height:100,
 		center:{x:'50%',y:'50%'},
 		type:"object"
 	});
@@ -275,11 +278,11 @@ function ObjectView(data) {
 	imagePreview.addEventListener("singletap", addPhoto);
 	
 	var imagePreviewBorder = Ti.UI.createView({
-		borderRadius:(Ti.Platform.getOsname() == "android") ? "120dp" : "60dp",
+		borderRadius:(Ti.Platform.getOsname() == "android") ? 130 : 65,
 		borderWidth:3,
 		borderColor:'#ffffff',
-		width:"120dp",
-		height:"120dp",
+		width:130,
+		height:130,
 		touchEnabled:false,
 		center:{x:'50%',y:'50%'}
 	});
@@ -288,8 +291,8 @@ function ObjectView(data) {
 	var addIcon = Titanium.UI.createButton({
 		top:5,
 		right:0,
-		height:"35dp",
-		width:"35dp",
+		height:35,
+		width:35,
 		title: '\u002B',
 		backgroundColor:'transparent',
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
@@ -431,7 +434,7 @@ function ObjectView(data) {
 		obj.image = null;
 		obj.file = null;
 	}
-	
+
 	return self;
 };
 
