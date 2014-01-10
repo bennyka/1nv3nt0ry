@@ -19,8 +19,9 @@ function ObjectView(data) {
 		var timestamp = new Date().getTime();
 		objData.id = timestamp;
 	}
-	var self = Ti.UI.createView({
-		backgroundGradient:style.backgroundGradient
+	var self = Ti.UI.createScrollView({
+		backgroundGradient:style.backgroundGradient,
+		contentHeight:'auto'
 	});
 
 	// ++++++++++++++TOP++++++++++++++
@@ -102,21 +103,21 @@ function ObjectView(data) {
 	var inputField = [
 		{
 			id:"serial",
-			width:'60%',
+			width:'55%',
 			type:'textfield',
 			hintText:L('Serial','Seriennummer')+"...",
 			title:L('Serial','Seriennummer')
 		},
 		{
 			id:"category",
-			width:'60%',
+			width:'55%',
 			type:'textfield',
 			hintText:L('Category','Kategorie')+"...",
 			title:L('Category','Kategorie')
 		},
 		{
 			id:"brand",
-			width:'60%',
+			width:'55%',
 			type:'textfield',
 			hintText:L('Brand','Marke')+"...",
 			title:L('Brand','Marke'),
@@ -193,7 +194,7 @@ function ObjectView(data) {
 					text:inputField[i].title,
 					bottom:(37 + (50*i)),
 					width:100,
-					left:10,
+					left:"10%",
 					visible:(Ti.Platform.getOsname() != "android") ? true : false,
 					color: '#ffffff',
 					font: {fontFamily: 'Helvetica Neue', fontSize:"12sp", color:'#000000'}			
@@ -216,19 +217,19 @@ function ObjectView(data) {
 	areaBottom.add(invoiceContainer);
 	invoiceContainer.addEventListener("singletap", addPhoto);
 	
-	var invoiceStatus = Ti.UI.createButton({
-		height:50,
-		width:50,
-		bottom:0,
-		center:{x:'50%'},
-		title: '\uE198',
-		backgroundColor:'transparent',
+	var invoiceFlag = Ti.UI.createButton({
+		center:{x:'50%',y:'50%'},
+		title: '\u002B',
+		width:Ti.UI.FILL,
+		height:Ti.UI.FILL,
+		touchEnabled:false,
+		backgroundColor:'#36000000',
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-		color: 'red',
+		color: '#ffffff',
 		selectedColor: '#994c616e',
-		font: {fontFamily: style.iconFontFamily, fontSize: '20sp'}
+		font: {fontFamily: style.iconFontFamily, fontSize: '23sp'}
 	});
-	invoiceContainer.add(invoiceStatus);
+	invoiceContainer.add(invoiceFlag);
 	
 	// invoice label
 	var transform = Ti.UI.create2DMatrix();
@@ -254,8 +255,8 @@ function ObjectView(data) {
 	invoiceImg.visible = true;
 	// ++++++++++++++IMG CONTAINER++++++++++++++
 	var imageContainer = Ti.UI.createView({
-		height:200,
-		width:200,
+		height:"170dp",
+		width:"170dp",
 		top:0,
 		center:{x:'50%'}
 	});
@@ -264,9 +265,9 @@ function ObjectView(data) {
 	var imagePreview = Ti.UI.createImageView({
 		image:(editMode) ? data.imagePath : null,
 		backgroundColor:style.whiteTransparentBackground,
-		borderRadius:(Ti.Platform.getOsname() == "android") ? 120 : 60,
-		width:120,
-		height:120,
+		borderRadius:(Ti.Platform.getOsname() == "android") ? "100dp" : "50dp",
+		width:"100dp",
+		height:"100dp",
 		center:{x:'50%',y:'50%'},
 		type:"object"
 	});
@@ -274,11 +275,11 @@ function ObjectView(data) {
 	imagePreview.addEventListener("singletap", addPhoto);
 	
 	var imagePreviewBorder = Ti.UI.createView({
-		borderRadius:(Ti.Platform.getOsname() == "android") ? 150 : 75,
+		borderRadius:(Ti.Platform.getOsname() == "android") ? "120dp" : "60dp",
 		borderWidth:3,
 		borderColor:'#ffffff',
-		width:150,
-		height:150,
+		width:"120dp",
+		height:"120dp",
 		touchEnabled:false,
 		center:{x:'50%',y:'50%'}
 	});
@@ -287,14 +288,14 @@ function ObjectView(data) {
 	var addIcon = Titanium.UI.createButton({
 		top:5,
 		right:0,
-		height:50,
-		width:50,
+		height:"35dp",
+		width:"35dp",
 		title: '\u002B',
 		backgroundColor:'transparent',
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 		color: '#ffffff',
 		selectedColor: '#994c616e',
-		font: {fontFamily: style.iconFontFamily, fontSize: '24sp'},
+		font: {fontFamily: style.iconFontFamily, fontSize: '20sp'},
 	});
 	imageContainer.add(addIcon);
 	addIcon.addEventListener("singletap", addPhoto);	
@@ -421,8 +422,7 @@ function ObjectView(data) {
 	function addImage(obj) {
 		//@TODO: check if image has height and width
 		if (obj.type == "invoice"){
-			invoiceStatus.title = '\uE199';
-			invoiceStatus.color = 'green';
+			invoiceFlag.title = '\uE207';
 			objData.imageInvoice = obj.image;	
 		} else {
 			imagePreview.image = obj.image;
