@@ -41,6 +41,7 @@ function StartView() {
 		center:{x:'50%',y:'50%'},
 		zIndex:100,
 		backgroundColor:'#66ffffff',
+		color:'#ffffff',
 		font: {fontFamily: style.iconFontFamily, fontSize: '40sp'}
 	});
 	areaBtnLeft.add(btnInventory);
@@ -91,6 +92,7 @@ function StartView() {
 		center:{x:'50%',y:'50%'},
 		zIndex:100,
 		backgroundColor:'#66ffffff',
+		color:'#ffffff',
 		font: {fontFamily: style.iconFontFamily, fontSize: '40sp'}
 	});
 	areaBtnRight.add(btnObject);

@@ -35,7 +35,7 @@ function ObjectView(data) {
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
 			title:L(' back ',' zurück '),
-			top:25,
+			top:20,
 			left:5,
 			color:'#ffffff',
 			borderColor:'#ffffff',
@@ -49,10 +49,10 @@ function ObjectView(data) {
 	}
 
 	var btnSave = Ti.UI.createView({
-		top:15,
+		top:20,
 		right:10,
-		width:65,
-		height:35,
+		width:55,
+		height:30,
 		borderColor:'#ffffff',
 		borderWidth:1,
 		borderRadius:5,
@@ -64,6 +64,7 @@ function ObjectView(data) {
 	var btnSaveTitle = Ti.UI.createLabel({
 		text: 'save',
 		touchEnabled:false,
+		color:'#ffffff',
 		center:{x:'50%',y:'50%'}
 	});
 	btnSave.add(btnSaveTitle);
