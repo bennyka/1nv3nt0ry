@@ -21,8 +21,8 @@
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>false</statusbar-hidden>
-    <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
+    <fullscreen>true</fullscreen>
+    <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
     <guid>5204df58-f39c-495b-a273-d7001cc07518</guid>
     <property name="ti.ui.defaultunit">dip</property>
