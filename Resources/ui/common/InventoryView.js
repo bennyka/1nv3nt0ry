@@ -154,19 +154,15 @@ function InventoryView() {
 			var id = e.source.objId;
 			dialog.show();
 			dialog.addEventListener("click", function(e){
-				switch(e.index){
-					case 0:
-						deleteData(id);
-						createInventoryList();
-						break;
-					case 1:
-						// Nein (Abbrechen)
-						break;
-				}
+				if (e.index == 0){
+					deleteData(id);
+				};
 			});
 			
 		});
-		
+		Ti.App.addEventListener("fillInventoryList",function(){
+			createInventoryList();
+		});
 		var btnEdit = Ti.UI.createButton({
 			center:{x:'50%'},
 			title: L('\uE236 Edit', '\uE236 Bearbeiten'),
@@ -233,8 +229,6 @@ function InventoryView() {
 			inventoryList.add(entry);
 		}
 	}
-	createInventoryList();
-	
 	return self;
 };
 

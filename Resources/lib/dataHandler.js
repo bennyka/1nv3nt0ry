@@ -105,22 +105,18 @@ function deleteData(id){
 }
 
 function updateData(data){
-	alert(data);
 	for (i in masterList){
 		if (data.id == masterList[i]){
 			// update txt file
 			var file = Ti.Filesystem.getFile(generalDir, masterList[i]+'.txt');
 			var string = file.read();
 			var json = JSON.parse(string);
-			alert(json);
 			json.description = (data.description) ? data.description : json.description;
 			json.brand = (data.brand) ? data.brand : json.brand;
 			json.category = (data.category) ? data.category : json.category;
 			json.serial = (data.serial) ? data.serial : json.serial;
-			
 			string = JSON.stringify(json);
 			file.write(string);
-			
 			//update image
 			if (data.image){
 				var image = Ti.Filesystem.getFile(generalDir, oldMasterList[i]+'.png');

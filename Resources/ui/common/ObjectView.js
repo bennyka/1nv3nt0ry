@@ -18,6 +18,8 @@ function ObjectView(data) {
 		// set id
 		var timestamp = new Date().getTime();
 		objData.id = timestamp;
+	} else {
+		objData.id = data.id;
 	}
 	var self = Ti.UI.createScrollView({
 		backgroundGradient:style.backgroundGradient,
@@ -79,7 +81,7 @@ function ObjectView(data) {
 			return;
 		}
 		if (editMode){
-			updateData(data);
+			updateData(objData);
 		} else {
 			saveData(objData);
 		};
@@ -160,7 +162,7 @@ function ObjectView(data) {
 				setTimeout(function(){
 					textfield.blur();
 				},200);
-				textfield.addEventListener("blur", function(e){
+				textfield.addEventListener("change", function(e){
 					switch(e.source.id){
 						case 'serial':
 							objData.serial = (e.value) ? e.value : null;
@@ -180,16 +182,16 @@ function ObjectView(data) {
 				if (editMode) {
 					switch(inputField[i].id){
 						case 'serial':
-							textfield.value = data.serial;
+							objData.serial = textfield.value = data.serial;
 							break;
 						case 'brand':
-							textfield.value = data.brand;
+							objData.brand = textfield.value = data.brand;
 							break;
 						case 'description':
-							textfield.value = data.description;
+							objData.description = textfield.value = data.description;
 							break;
 						case 'category':
-							textfield.value = data.category;
+							objData.category = textfield.value = data.category;
 							break;
 					}
 				}

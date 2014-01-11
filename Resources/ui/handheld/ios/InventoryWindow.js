@@ -17,7 +17,9 @@ function InventoryWindow(data) {
 	inventoryView.addEventListener("shouldCloseView", function () {
 		self.close();
 	});
-
+	self.addEventListener("focus", function(){
+		Ti.App.fireEvent("fillInventoryList");
+	});
 	return self;
 }
 
