@@ -82,6 +82,7 @@ function ObjectView(data) {
 		}
 		if (editMode){
 			updateData(objData);
+			Ti.App.fireEvent("fillInventoryList");
 		} else {
 			saveData(objData);
 		};

@@ -1,4 +1,5 @@
 Ti.include("/lib/dataHandler.js");
+Ti.include("/lib/email.js");
 function InventoryView() {
 	var self = Ti.UI.createView({
 		backgroundGradient:style.backgroundGradient
@@ -112,7 +113,7 @@ function InventoryView() {
 			center:{x:'50%',y:'50%'},
 			zIndex:100,
 			backgroundColor:'#66ffffff',
-			image:(entry.imagePath) ? entry.imagePath : null
+			image:(entry.imgObject) ? entry.imgObject : null
 		});
 		objectContainer.add(entryImage);
 
@@ -156,13 +157,12 @@ function InventoryView() {
 			dialog.addEventListener("click", function(e){
 				if (e.index == 0){
 					deleteData(id);
+					Ti.App.fireEvent("fillInventoryList");
 				};
 			});
 			
 		});
-		Ti.App.addEventListener("fillInventoryList",function(){
-			createInventoryList();
-		});
+		
 		var btnEdit = Ti.UI.createButton({
 			center:{x:'50%'},
 			title: L('\uE236 Edit', '\uE236 Bearbeiten'),
@@ -181,7 +181,7 @@ function InventoryView() {
 			var objectView = new ObjectView(e.source.objData);
 			objectView.open();
 		});
-		
+		// send object per mail
 		var btnSend = Ti.UI.createButton({
 			right:15,
 			title: L('\uE422 Send', '\uE422 Senden'),
@@ -194,8 +194,27 @@ function InventoryView() {
 		});
 		background3.add(btnSend);
 		
-		btnSend.addEventListener("click", function(e){
-			alert(e.source.title);
+		btnSend.addEventListener("click", function(){
+			var email = Ti.UI.createEmailDialog({
+				subject:'Inventory: '+entry.description,
+				messageBody:getEmail(entry),
+			});
+			if (entry.imgInvoice){
+				var imgFile = Ti.Filesystem.getFile(entry.imgInvoice);
+				email.addAttachment(imgFile);
+			};
+			if (entry.imgObject){
+				var objFile = Ti.Filesystem.getFile(entry.imgObject);
+				email.addAttachment(objFile);
+			};
+			var txtFile = Ti.Filesystem.getFile(entry.txtFile);
+			txtFile.rename(entry.description);
+			setTimeout(function(){
+				alert(txtFile.getName());
+			},1000);
+			
+			email.addAttachment(txtFile);
+			email.open();
 		});
 		
 		var line = Ti.UI.createView({
@@ -229,6 +248,11 @@ function InventoryView() {
 			inventoryList.add(entry);
 		}
 	}
+	createInventoryList();
+	
+	Ti.App.addEventListener("fillInventoryList",function(){
+		createInventoryList();
+	});
 	return self;
 };
 

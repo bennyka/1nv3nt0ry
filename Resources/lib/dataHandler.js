@@ -31,36 +31,38 @@ function saveData(data){
 	if (data.id){
 		//save object image 
 		if (data.image){
-			var file = Ti.Filesystem.getFile(generalDir, data.id+'.png');
-			if (!file.exists() && Ti.Platform.getOsname() != "android"){
-				file.createFile();
+			var objImageFile = Ti.Filesystem.getFile(generalDir, data.id+'.png');
+			if (!objImageFile.exists() && Ti.Platform.getOsname() != "android"){
+				objImageFile.createFile();
 			};
-			file.write(data.image);
+			objImageFile.write(data.image);
 		}
 		if (data.imageInvoice){
-			var file = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
-			if (!file.exists() && Ti.Platform.getOsname() != "android"){
-				file.createFile();
+			var invoiceImgFile = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
+			if (!invoiceImgFile.exists() && Ti.Platform.getOsname() != "android"){
+				invoiceImgFile.createFile();
 			};
-			file.write(data.imageInvoice);
+			invoiceImgFile.write(data.imageInvoice);
 		}
 		
-		var file = Ti.Filesystem.getFile(generalDir, data.id+'.txt');
-		if (!file.exists() && Ti.Platform.getOsname() != "android"){
-			file.createFile();
+		var txtFile = Ti.Filesystem.getFile(generalDir, data.id+'.txt');
+		if (!txtFile.exists() && Ti.Platform.getOsname() != "android"){
+			txtFile.createFile();
 		};
-		
 		var dataObj = {
 				"id":(data.id) ? data.id : null,
 				"date":(data.date) ? data.date : null,
 				"brand":(data.brand) ? data.brand : null,
 				"category":(data.category) ? data.category : null,
 				"description":(data.description) ? data.description : null,
-				"serial":(data.serial) ? data.serial : null
+				"serial":(data.serial) ? data.serial : null,
+				"txtFile":txtFile.nativePath,
+				"imgInvoice":(data.imageInvoice) ? invoiceImgFile.nativePath : null,
+				"imgObject":(data.image) ? objImageFile.nativePath : null
 		};
 		
 		var json = JSON.stringify(dataObj);
-		file.write(json);
+		txtFile.write(json);
 		masterList.push(data.id);
 		Ti.App.Properties.setList("maserList", masterList);
 	}
@@ -75,11 +77,7 @@ function loadData(){
 			if (file.exists()){
 				var json = file.read();
 				var dataObj = JSON.parse(json);
-				
-				var image = Ti.Filesystem.getFile(generalDir, masterList[i]+'.png');
-				if (image.exists()){
-					dataObj.imagePath = image.nativePath;
-				};			
+					
 				itemList.push(dataObj);
 			}
 		}
