@@ -156,6 +156,7 @@ function InventoryView() {
 			dialog.show();
 			dialog.addEventListener("click", function(e){
 				if (e.index == 0){
+					alert(id);
 					deleteData(id);
 					Ti.App.fireEvent("fillInventoryList");
 				};
@@ -208,11 +209,6 @@ function InventoryView() {
 				email.addAttachment(objFile);
 			};
 			var txtFile = Ti.Filesystem.getFile(entry.txtFile);
-			txtFile.rename(entry.description);
-			setTimeout(function(){
-				alert(txtFile.getName());
-			},1000);
-			
 			email.addAttachment(txtFile);
 			email.open();
 		});
@@ -251,6 +247,7 @@ function InventoryView() {
 	createInventoryList();
 	
 	Ti.App.addEventListener("fillInventoryList",function(){
+		// alert("event");
 		createInventoryList();
 	});
 	return self;
