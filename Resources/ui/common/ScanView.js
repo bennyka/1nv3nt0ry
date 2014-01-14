@@ -2,7 +2,7 @@ function ScanView(){
 	var self = Ti.UI.createView();
 	
 	// load the Scandit SDK module
-	var scanditsdk = require("com.mirasense.scanditsdk");
+	// var scanditsdk = require("com.mirasense.scanditsdk");
 	var picker = scanditsdk.createView({
         width:"100%",
         height:"100%"

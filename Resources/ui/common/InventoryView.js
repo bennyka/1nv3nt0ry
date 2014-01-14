@@ -37,11 +37,6 @@ function InventoryView() {
 	});
 	areaTop.add(headline);
 	
-	var dialog = Ti.UI.createAlertDialog({
-		title:L('Delete this Entry?','Diesen Eintrag löschen?'),
-		buttonNames:[L('Yes','Ja'),L('No', 'Nein')]
-	});
-	
 	// ++++++++++++++REST OF PAGE++++++++++++++
 	function createInventoryEntry(entry){
 		var objectContainer = Ti.UI.createView({
@@ -153,10 +148,13 @@ function InventoryView() {
 		
 		btnDelete.addEventListener("click", function(e){
 			var id = e.source.objId;
+			var dialog = Ti.UI.createAlertDialog({
+				title:L('Delete '+entry.description+'?','Eintrag '+entry.description+' löschen?'),
+				buttonNames:[L('Yes','Ja'),L('No', 'Nein')]
+			});
 			dialog.show();
 			dialog.addEventListener("click", function(e){
 				if (e.index == 0){
-					alert(id);
 					deleteData(id);
 					Ti.App.fireEvent("fillInventoryList");
 				};

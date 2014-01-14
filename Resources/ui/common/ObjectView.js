@@ -90,21 +90,21 @@ function ObjectView(data) {
 	});
 	areaTop.add(btnSave);
 	
-	var btnScan = Ti.UI.createButton({
-		title:L(' scan ',' scan '),
-		top:60,
-		left:5,
-		color:'#ffffff',
-		borderColor:'#ffffff',
-		borderWidth:1,
-		borderRadius:5
-	});
-	btnScan.addEventListener("click", function(e){
-		var ScanView = require(Ti.App.config.windowPath + 'ScanWindow');
-		var scanView = new ScanView();
-		scanView.open();
-	});
-	areaTop.add(btnScan);
+	// var btnScan = Ti.UI.createButton({
+		// title:L(' scan ',' scan '),
+		// top:60,
+		// left:5,
+		// color:'#ffffff',
+		// borderColor:'#ffffff',
+		// borderWidth:1,
+		// borderRadius:5
+	// });
+	// btnScan.addEventListener("click", function(e){
+		// var ScanView = require(Ti.App.config.windowPath + 'ScanWindow');
+		// var scanView = new ScanView();
+		// scanView.open();
+	// });
+	// areaTop.add(btnScan);
 	
 	var headline = Ti.UI.createLabel({
 		text:L('add Object','Objekt hinzufügen'),
