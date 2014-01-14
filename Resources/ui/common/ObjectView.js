@@ -53,7 +53,7 @@ function ObjectView(data) {
 	var btnSave = Ti.UI.createView({
 		top:20,
 		right:10,
-		width:55,
+		width:80,
 		height:30,
 		borderColor:'#ffffff',
 		borderWidth:1,
@@ -64,7 +64,7 @@ function ObjectView(data) {
 	});
 	
 	var btnSaveTitle = Ti.UI.createLabel({
-		text: 'save',
+		text: L('save','speichern'),
 		touchEnabled:false,
 		color:'#ffffff',
 		center:{x:'50%',y:'50%'}
@@ -107,9 +107,9 @@ function ObjectView(data) {
 	// areaTop.add(btnScan);
 	
 	var headline = Ti.UI.createLabel({
-		text:L('add Object','Objekt hinzufügen'),
+		text:(editMode) ? L('Edit Object', 'Objekt bearbeiten') : L('add Object','Objekt hinzufügen'),
 		center:{x:'50%',y:'50%'},
-		font: {fontFamily: style.specialFontFamily, fontSize:"40sp"},
+		font: {fontFamily: style.specialFontFamily, fontSize:"50sp"},
 		color:'#ffffff'
 	});
 	areaTop.add(headline);
@@ -173,6 +173,7 @@ function ObjectView(data) {
 					id:inputField[i].id,
 					hintText:inputField[i].hintText,
 					color: '#ffffff',
+					// returnKeyType: Ti.UI.RETURNKEY_NEXT,
 					font: {fontFamily: 'Helvetica Neue', fontSize:"13sp", color:'#000000'}		
 				});
 				areaBottom.add(textfield);
@@ -242,7 +243,7 @@ function ObjectView(data) {
 	
 	var invoiceFlag = Ti.UI.createButton({
 		center:{x:'50%',y:'50%'},
-		title: '\u002B',
+		title: (data && data.imgInvoice) ? '\uE207' : '\u002B',
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,
 		touchEnabled:false,
@@ -286,7 +287,7 @@ function ObjectView(data) {
 	areaBottom.add(imageContainer);
 
 	var imagePreview = Ti.UI.createImageView({
-		image:(editMode) ? data.imagePath : null,
+		image:(editMode) ? data.imgObject : null,
 		backgroundColor:style.whiteTransparentBackground,
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
 		width:100,
@@ -446,10 +447,10 @@ function ObjectView(data) {
 		//@TODO: check if image has height and width
 		if (obj.type == "invoice"){
 			invoiceFlag.title = '\uE207';
-			objData.imageInvoice = obj.image;	
+			objData.imgInvoice = obj.image;	
 		} else {
 			imagePreview.image = obj.image;
-			objData.image = obj.image;
+			objData.imgObject = obj.image;
 		}
 		obj.image = null;
 		obj.file = null;

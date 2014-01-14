@@ -113,19 +113,39 @@ function updateData(data){
 			json.brand = (data.brand) ? data.brand : json.brand;
 			json.category = (data.category) ? data.category : json.category;
 			json.serial = (data.serial) ? data.serial : json.serial;
+			//update image
+			if (data.imgObject){
+				var objImage = Ti.Filesystem.getFile(generalDir, masterList[i]+'.png');
+				
+				if (data.imgObject != objImage){
+					objImage.deleteFile();
+					
+					var objFile = Ti.Filesystem.getFile(generalDir, data.id+'.png');
+					if (!objFile.exists() && Ti.Platform.getOsname() != "android"){
+						objFile.createFile();
+					};
+					objFile.write(data.imgObject);
+					json.imgObject = objFile.nativePath;
+				}
+			}
+			if (data.imgInvoice){
+				var invoiceImage = Ti.Filesystem.getFile(generalDir, masterList[i]+'_invoice.png');
+				
+				if (data.imgInvoice != invoiceImage){
+					invoiceImage.deleteFile();
+					
+					var InvoiceFile = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
+					if (!InvoiceFile.exists() && Ti.Platform.getOsname() != "android"){
+						InvoiceFile.createFile();
+					};
+					InvoiceFile.write(data.imgInvoice);
+					json.imgInvoice = InvoiceFile.nativePath;
+				}
+			}
+			
+			
 			string = JSON.stringify(json);
 			file.write(string);
-			//update image
-			if (data.image){
-				var image = Ti.Filesystem.getFile(generalDir, oldMasterList[i]+'.png');
-				image.deleteFile();
-				
-				var file = Ti.Filesystem.getFile(generalDir, data.id+'.png');
-				if (!file.exists() && Ti.Platform.getOsname() != "android"){
-					file.createFile();
-				};
-				file.write(data.image);
-			}
 		}
 	}
 }

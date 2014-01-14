@@ -42,6 +42,7 @@ function InventoryView() {
 		var objectContainer = Ti.UI.createView({
 			height:150,
 		});
+		
 		// ++++++++++++++entryName & entryDate++++++++++++++
 		var background1 = Ti.UI.createView({
 			top:0,
@@ -50,13 +51,20 @@ function InventoryView() {
 		});
 		objectContainer.add(background1);
 		
+		background1.addEventListener("click", function(){
+			var ObjectPreviewView = require(Ti.App.config.windowPath + 'ObjectPreviewWindow');
+			var objectPreviewView = new ObjectPreviewView(entry);
+			objectPreviewView.open();
+		});
+		
 		var entryName = Ti.UI.createLabel({
 			top:2,
 			height:Ti.UI.SIZE,
 			left:"40%",
 			text:entry.description,
 			color:'#ffffff',
-			font:{fontWeight:'bold'}
+			font:{fontWeight:'bold'},
+			touchEnabled:false
 		});
 		background1.add(entryName);
 		
@@ -66,7 +74,8 @@ function InventoryView() {
 			left:"40%",
 			text:L('created at '+entry.date,'erstellt am '+entry.date),
 			color:'#ffffff',
-			font:{fontSize:'12sp'}
+			font:{fontSize:'12sp'},
+			touchEnabled:false
 		});
 		background1.add(entryCreationDate);
 		
@@ -78,13 +87,20 @@ function InventoryView() {
 		});
 		objectContainer.add(background2);
 		
+		background2.addEventListener("click", function(){
+			var ObjectPreviewView = require(Ti.App.config.windowPath + 'ObjectPreviewWindow');
+			var objectPreviewView = new ObjectPreviewView(entry);
+			objectPreviewView.open();
+		});
+		
 		var entryCategory = Ti.UI.createLabel({
 			top:4,
 			height:Ti.UI.SIZE,
 			left:"40%",
 			text:L('Category: '+entry.category,'Kategorie: '+entry.category),
 			color:'#ffffff',
-			font:{fontSize:'10sp'}
+			font:{fontSize:'10sp'},
+			touchEnabled:false
 		});
 		background2.add(entryCategory);
 		
@@ -94,7 +110,8 @@ function InventoryView() {
 			left:"40%",
 			text:L('Brand: '+entry.brand,'Marke: '+entry.brand),
 			color:'#ffffff',
-			font:{fontSize:'10sp'}
+			font:{fontSize:'10sp'},
+			touchEnabled:false
 		});
 		background2.add(entryBrand);
 		// ++++++++++++++Bild++++++++++++++
@@ -108,7 +125,8 @@ function InventoryView() {
 			center:{x:'50%',y:'50%'},
 			zIndex:100,
 			backgroundColor:'#66ffffff',
-			image:(entry.imgObject) ? entry.imgObject : null
+			image:(entry.imgObject) ? entry.imgObject : null,
+			touchEnabled:false
 		});
 		objectContainer.add(entryImage);
 
@@ -122,7 +140,8 @@ function InventoryView() {
 			width:78,
 			bubbleParent:true,
 			zIndex:10,
-			center:{x:'50%',y:'50%'}
+			center:{x:'50%',y:'50%'},
+			touchEnabled:false
 		});
 		objectContainer.add(entryImageBorder);
 		
@@ -159,7 +178,6 @@ function InventoryView() {
 					Ti.App.fireEvent("fillInventoryList");
 				};
 			});
-			
 		});
 		
 		var btnEdit = Ti.UI.createButton({
@@ -168,7 +186,6 @@ function InventoryView() {
 			backgroundColor:'transparent',
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
-			objData:entry,
 			selectedColor: '#994c616e',
 			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'},
 			
@@ -177,7 +194,7 @@ function InventoryView() {
 		
 		btnEdit.addEventListener("click", function(e){
 			var ObjectView = require(Ti.App.config.windowPath + 'ObjectWindow');
-			var objectView = new ObjectView(e.source.objData);
+			var objectView = new ObjectView(entry);
 			objectView.open();
 		});
 		// send object per mail

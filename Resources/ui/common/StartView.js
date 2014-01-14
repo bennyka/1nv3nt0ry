@@ -35,7 +35,6 @@ function StartView() {
 	var btnInventory = Ti.UI.createButton({
 		title: '\uE115',
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
-		borderColor:'#ffffff',
 		height:100,
 		width:100,
 		center:{x:'50%',y:'50%'},
@@ -86,7 +85,6 @@ function StartView() {
 	var btnObject = Ti.UI.createButton({
 		title: '\u002B',
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 100 : 50,
-		borderColor:'#ffffff',
 		height:100,
 		width:100,
 		center:{x:'50%',y:'50%'},
