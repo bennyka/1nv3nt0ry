@@ -4,7 +4,7 @@
         <target device="tizen">false</target>
         <target device="mobileweb">true</target>
         <target device="iphone">true</target>
-        <target device="ipad">true</target>
+        <target device="ipad">false</target>
         <target device="blackberry">false</target>
         <target device="android">true</target>
     </deployment-targets>
@@ -49,8 +49,5 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules>
-        <module platform="android">com.mirasense.scanditsdk</module>
-        <module platform="iphone">com.mirasense.scanditsdk</module>
-    </modules>
+    <modules/>
 </ti:app>
