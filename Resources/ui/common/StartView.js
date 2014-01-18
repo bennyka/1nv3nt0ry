@@ -140,7 +140,7 @@ function StartView() {
 	});
 	areaBottom.add(btnLine);
 	
-	var btnImprint = Ti.UI.createView({
+	var btnSettings = Ti.UI.createView({
 		borderRadius:(Ti.Platform.getOsname() == "android") ? 120 : 60,
 		height:120,
 		width:120,
@@ -148,23 +148,24 @@ function StartView() {
 		bottom:-60,
 		center:{x:'50%'}
 	});
-	areaBottom.add(btnImprint);
+	areaBottom.add(btnSettings);
 	
-	btnImprint.addEventListener("click", function(){
-		var ImprintView = require(Ti.App.config.windowPath + 'ImprintWindow');
-		var imprintView = new ImprintView();
-		imprintView.open();
+	btnSettings.addEventListener("click", function(){
+		var SettingsView = require(Ti.App.config.windowPath + 'SettingsWindow');
+		var settingsView = new SettingsView();
+		settingsView.open();
 	});
 	
-	var btnImprintTitle = Ti.UI.createLabel({
-		text:L('Impressum','Impressum'),
+	var btnSettingsTitle = Ti.UI.createLabel({
+		text:L('Settings','Einstellungen'),
 		center:{x:'50%'},	
 		font:{fontFamily:style.specialFontFamily,fontSize:"30sp"},
 		color:'#ffffff',
 		touchEnabled:false,
 		bottom:2
 	});
-	areaBottom.add(btnImprintTitle);
+	areaBottom.add(btnSettingsTitle);
+
 	return self;
 };
 

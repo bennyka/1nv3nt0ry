@@ -1,20 +1,19 @@
-function ImprintWindow() {
+function ObjectPreviewWindow(data) {
 	//load component dependencies
-	var ImprintView = require('ui/common/ImprintView');
+	var ObjectPreviewView = require('ui/common/ObjectPreviewView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
-		modal: true,
 		orientationModes:[Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],
 		navBarHidden: true
 	});
 		
 	//construct UI
-	var imprintView = new ImprintView();
-	self.add(imprintView);
+	var objectPreviewView = new ObjectPreviewView(data);
+	self.add(objectPreviewView);
 
-	imprintView.addEventListener("shouldCloseView", function () {
+	objectPreviewView.addEventListener("shouldCloseView", function () {
 		self.close();
 	});
 
@@ -22,4 +21,4 @@ function ImprintWindow() {
 }
 
 //make constructor function the public component interface
-module.exports = ImprintWindow;
+module.exports = ObjectPreviewWindow;

@@ -1,6 +1,6 @@
 function ImprintWindow() {
 	//load component dependencies
-	var ImprintView = require('ui/common/imprintView');
+	var ImprintView = require('ui/common/ImprintView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({

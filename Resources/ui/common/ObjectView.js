@@ -52,7 +52,7 @@ function ObjectView(data) {
 
 	var btnSave = Ti.UI.createView({
 		top:20,
-		right:10,
+		right:5,
 		width:80,
 		height:30,
 		borderColor:'#ffffff',
@@ -90,21 +90,26 @@ function ObjectView(data) {
 	});
 	areaTop.add(btnSave);
 	
-	// var btnScan = Ti.UI.createButton({
-		// title:L(' scan ',' scan '),
-		// top:60,
-		// left:5,
-		// color:'#ffffff',
-		// borderColor:'#ffffff',
-		// borderWidth:1,
-		// borderRadius:5
-	// });
-	// btnScan.addEventListener("click", function(e){
-		// var ScanView = require(Ti.App.config.windowPath + 'ScanWindow');
-		// var scanView = new ScanView();
-		// scanView.open();
-	// });
-	// areaTop.add(btnScan);
+	var btnScan = Ti.UI.createButton({
+		top:(Ti.Platform.getOsname() == "android") ? 20 : 60,
+		left:5,
+		title: '\uE260',
+		backgroundColor:'transparent',
+		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+		color: '#ffffff',
+		selectedColor: '#994c616e',
+		font: {fontFamily: style.iconFontFamily, fontSize: '16sp'},
+		borderColor:'#ffffff',
+		borderWidth:1,
+		borderRadius:5
+	});
+
+	btnScan.addEventListener("click", function(e){
+		var ScanView = require(Ti.App.config.windowPath + 'ScanWindow');
+		var scanView = new ScanView();
+		scanView.open();
+	});
+	areaTop.add(btnScan);
 	
 	var headline = Ti.UI.createLabel({
 		text:(editMode) ? L('Edit Object', 'Objekt bearbeiten') : L('add Object','Objekt hinzufügen'),

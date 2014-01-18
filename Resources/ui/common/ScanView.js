@@ -2,13 +2,13 @@ function ScanView(){
 	var self = Ti.UI.createView();
 	
 	// load the Scandit SDK module
-	// var scanditsdk = require("com.mirasense.scanditsdk");
+	var scanditsdk = require("com.mirasense.scanditsdk");
 	var picker = scanditsdk.createView({
         width:"100%",
         height:"100%"
     });
     // Initialize the barcode picker, remember to paste your own app key here.
-    picker.init("Z0MclHuyEeOGso/brTymXL4RoEYH9/pO9qApuuIsmA4");
+    picker.init("Z0MclHuyEeOGso/brTymXL4RoEYH9/pO9qApuuIsmA4",0);
     picker.showSearchBar(true);
     // add a tool bar at the bottom of the scan view with a cancel button (iphone/ipad only)
     picker.showToolBar(true);
@@ -41,14 +41,14 @@ function ScanView(){
 	function closeScanner() {
 	    if (picker != null) {
 	        picker.stopScanning();
-	        window.remove(picker);
+	        self.remove(picker);
 	    }
 	    self.fireEvent("shouldCloseView");
 	}
 	// Changes the picker dimensions and the video feed orientation when the
 	// orientation of the device changes.
 	Ti.Gesture.addEventListener('orientationchange', function(e) {
-	    window.orientationModes = [Titanium.UI.PORTRAIT, Titanium.UI.UPSIDE_PORTRAIT, 
+	    self.orientationModes = [Titanium.UI.PORTRAIT, Titanium.UI.UPSIDE_PORTRAIT, 
 	                   Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT];
 	    if (picker != null) {
 	        picker.setOrientation(e.orientation);

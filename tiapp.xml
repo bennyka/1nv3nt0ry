@@ -24,7 +24,7 @@
     <fullscreen>true</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
-    <guid>5204df58-f39c-495b-a273-d7001cc07518</guid>
+   <guid>0893f9a1-45d1-4b07-9446-74c67e2c27e9</guid>
     <property name="ti.ui.defaultunit">dip</property>
     <iphone>
         <orientations device="iphone">
@@ -49,5 +49,8 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules/>
+    <modules>
+        <module platform="android">com.mirasense.scanditsdk</module>
+        <module platform="iphone">com.mirasense.scanditsdk</module>
+    </modules>
 </ti:app>

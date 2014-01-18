@@ -1,6 +1,6 @@
-function ImprintWindow() {
+function SettingsWindow() {
 	//load component dependencies
-	var ImprintView = require('ui/common/ImprintView');
+	var SettingsView = require('ui/common/SettingsView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
@@ -11,10 +11,10 @@ function ImprintWindow() {
 	});
 		
 	//construct UI
-	var imprintView = new ImprintView();
-	self.add(imprintView);
+	var settingsView = new SettingsView();
+	self.add(settingsView);
 
-	imprintView.addEventListener("shouldCloseView", function () {
+	settingsView.addEventListener("shouldCloseView", function () {
 		self.close();
 	});
 
@@ -22,4 +22,4 @@ function ImprintWindow() {
 }
 
 //make constructor function the public component interface
-module.exports = ImprintWindow;
+module.exports = SettingsWindow;

@@ -2,7 +2,7 @@
 <resources>
 	<!-- General -->
 	<string name="back">Zurück</string>
-	<string name="save">Speichern</string>
+	<string name="save">speichern</string>
 	<!-- startView -->
 	<string name="inventory">Inventar</string>
 	<string name="createObject">Neues Objekt \n anlegen</string>
