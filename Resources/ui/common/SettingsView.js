@@ -46,7 +46,7 @@ function SettingsView() {
 	self.add(areaBottom);
 	
 	var infoLabel = Ti.UI.createLabel({
-		text:L('showInfoIcons'),
+		text:L('showInfoIcon'),
 		height:'auto',
 		width:'auto',
 		top:45,
