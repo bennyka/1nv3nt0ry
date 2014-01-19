@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<!-- General -->
-	<string name="back">Zurück</string>
-	<string name="save">speichern</string>
+	<string name="back"> zurück </string>
+	<string name="save"> speichern </string>
+	
 	<!-- startView -->
-	<string name="inventory">Inventar</string>
-	<string name="createObject">Neues Objekt \n anlegen</string>
+	<string name="inventory"> Inventar </string>
+	<string name="createObject"> Neues Objekt \n anlegen </string>
+	<string name="settings"> Einstellungen </string>
+	<string name="addObject"> Objekt hinzufügen </string>
+	
+	<!-- settingsView -->
 	<string name="imprint">Impressum</string>
 	
 	<!-- ObjectView -->
@@ -15,4 +20,6 @@
 	<string name="serial">Serial</string>
 	<string name="brand">Brand</string>
 	<string name="addInvoice">Rechnung als Foto hinzufügen</string>
+	<string name="infoInvoice">Laden Sie ein Foto Ihrer Rechnung hoch</string>
+	<string name="infoScan">Scannen Sie ihr Produkt einfach ein</string>
 </resources>

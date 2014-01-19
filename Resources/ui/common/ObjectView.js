@@ -1,5 +1,6 @@
 Ti.include("/lib/styles.js");
 Ti.include("/lib/dataHandler.js");
+Ti.include("/lib/createInfoIcon.js");
 // var ImageFactory = require('fh.imagefactory');	
 
 
@@ -36,7 +37,7 @@ function ObjectView(data) {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L(' back ',' zurück '),
+			title:L('back'),
 			top:20,
 			left:5,
 			color:'#ffffff',
@@ -64,7 +65,7 @@ function ObjectView(data) {
 	});
 	
 	var btnSaveTitle = Ti.UI.createLabel({
-		text: L('save','speichern'),
+		text: L('save'),
 		touchEnabled:false,
 		color:'#ffffff',
 		center:{x:'50%',y:'50%'}
@@ -110,6 +111,13 @@ function ObjectView(data) {
 		scanView.open();
 	});
 	areaTop.add(btnScan);
+	
+	var scanIcon = createInfoIcon({
+		left:5,
+		top:btnScan.top+30,
+		text:L('infoScan'),
+		win:self
+	});
 	
 	var headline = Ti.UI.createLabel({
 		text:(editMode) ? L('Edit Object', 'Objekt bearbeiten') : L('add Object','Objekt hinzufügen'),
@@ -245,6 +253,13 @@ function ObjectView(data) {
 	});
 	areaBottom.add(invoiceContainer);
 	invoiceContainer.addEventListener("singletap", addPhoto);
+	
+	var invoiceIcon = createInfoIcon({
+		right:'9%',
+		bottom:invoiceContainer.bottom+invoiceContainer.height,
+		text:L('infoInvoice'),
+		win:self
+	});
 	
 	var invoiceFlag = Ti.UI.createButton({
 		center:{x:'50%',y:'50%'},

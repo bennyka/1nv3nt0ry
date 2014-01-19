@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<!-- General -->
-	<string name="back">Back</string>
-	<string name="save">Save</string>
+	<string name="back"> back </string>
+	<string name="save"> save </string>
 	<!-- StartView -->
-	<string name="inventory">Inventory</string>
-	<string name="createObject">Create New \nObject</string>
+	<string name="inventory"> Inventory </string>
+	<string name="createObject"> Create New \nObject </string>
+	<string name="settings"> Settings </string>
+	<string name="addObject"> add Object </string>
+	
+	<!-- settingsView -->
 	<string name="imprint">Imprint</string>
 	
 	<!-- ObjectView -->
@@ -15,4 +19,6 @@
 	<string name="serial">Seriennummer</string>
 	<string name="brand">Marke</string>
 	<string name="addInvoice">Add Invoice as Picture</string>
+	<string name="infoInvoice">Laden Sie ein Foto Ihrer Rechnung hoch</string>
+	<string name="infoScan">Scannen Sie ihr Produkt einfach ein</string>
 </resources>

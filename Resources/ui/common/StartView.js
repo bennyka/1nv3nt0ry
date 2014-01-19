@@ -64,7 +64,7 @@ function StartView() {
 	areaBtnLeft.add(btnInventoryBorder);
 	
 	var btnInventoryTitle = Ti.UI.createLabel({
-		text:L('Inventory','Inventar'),
+		text:L('inventory'),
 		center:{x:'50%'},
 		color:'#ffffff',
 		font:{fontFamily:style.specialFontFamily,fontSize:"35sp"},
@@ -114,7 +114,7 @@ function StartView() {
 	areaBtnRight.add(btnObjectBorder);
 	
 	var btnObjectTitle = Ti.UI.createLabel({
-		text:L('add Object','Objekt hinzufügen'),
+		text:L('addObject'),
 		center:{x:'50%'},	
 		font:{fontFamily:style.specialFontFamily,fontSize:"35sp"},
 		color:'#ffffff',
@@ -157,7 +157,7 @@ function StartView() {
 	});
 	
 	var btnSettingsTitle = Ti.UI.createLabel({
-		text:L('Settings','Einstellungen'),
+		text:L('settings'),
 		center:{x:'50%'},	
 		font:{fontFamily:style.specialFontFamily,fontSize:"30sp"},
 		color:'#ffffff',

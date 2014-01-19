@@ -45,6 +45,28 @@ function SettingsView() {
 	});
 	self.add(areaBottom);
 	
+	var infoLabel = Ti.UI.createLabel({
+		text:L('Show Info Icons', 'Information anzeigen'),
+		height:'auto',
+		width:'auto',
+		top:45,
+		left:10,
+		color:'#ffffff'
+	});
+	areaBottom.add(infoLabel);
+	
+	var infoSwitch = Ti.UI.createSwitch({
+		value:(Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : true,
+		top:40,
+		right:30
+	});
+	areaBottom.add(infoSwitch);
+	
+	infoSwitch.addEventListener('change',function(e){
+	  Ti.App.showInfo = e.value;
+	  Ti.App.Properties.setBool("showInfo", e.value);
+	});
+	
 	var btnImprint = Ti.UI.createView({
 		bottom:20,
 		center:{x:'50%'},
