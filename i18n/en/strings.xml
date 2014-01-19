@@ -7,7 +7,7 @@
 	<string name="inventory"> Inventory </string>
 	<string name="createObject"> Create New \nObject </string>
 	<string name="settings"> Settings </string>
-	<string name="addObject"> add Object </string>
+	<string name="addObject"> Add Object </string>
 	
 	<!-- settingsView -->
 	<string name="imprint">Imprint</string>
@@ -21,4 +21,5 @@
 	<string name="addInvoice">Add Invoice as Picture</string>
 	<string name="infoInvoice">Laden Sie ein Foto Ihrer Rechnung hoch</string>
 	<string name="infoScan">Scannen Sie ihr Produkt einfach ein</string>
+	<string name="infoImage">Laden Sie ein Foto des Gegenstandes hoch</string>
 </resources>

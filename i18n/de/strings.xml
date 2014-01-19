@@ -22,4 +22,5 @@
 	<string name="addInvoice">Rechnung als Foto hinzufügen</string>
 	<string name="infoInvoice">Laden Sie ein Foto Ihrer Rechnung hoch</string>
 	<string name="infoScan">Scannen Sie ihr Produkt einfach ein</string>
+	<string name="infoImage">Laden Sie ein Foto des Gegenstandes hoch</string>
 </resources>

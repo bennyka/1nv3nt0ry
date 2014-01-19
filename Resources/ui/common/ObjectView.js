@@ -54,7 +54,7 @@ function ObjectView(data) {
 	var btnSave = Ti.UI.createView({
 		top:20,
 		right:5,
-		width:80,
+		width:Ti.UI.SIZE,
 		height:30,
 		borderColor:'#ffffff',
 		borderWidth:1,
@@ -93,7 +93,7 @@ function ObjectView(data) {
 	
 	var btnScan = Ti.UI.createButton({
 		top:(Ti.Platform.getOsname() == "android") ? 20 : 60,
-		left:5,
+		right:5,
 		title: '\uE260',
 		backgroundColor:'transparent',
 		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
@@ -113,7 +113,7 @@ function ObjectView(data) {
 	areaTop.add(btnScan);
 	
 	var scanIcon = createInfoIcon({
-		left:5,
+		right:btnScan.right,
 		top:btnScan.top+30,
 		text:L('infoScan'),
 		win:self
@@ -121,7 +121,7 @@ function ObjectView(data) {
 	
 	var headline = Ti.UI.createLabel({
 		text:(editMode) ? L('Edit Object', 'Objekt bearbeiten') : L('add Object','Objekt hinzufügen'),
-		center:{x:'50%',y:'50%'},
+		center:{x:'50%',y:'60%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"50sp"},
 		color:'#ffffff'
 	});
@@ -328,6 +328,13 @@ function ObjectView(data) {
 		center:{x:'50%',y:'50%'}
 	});
 	imageContainer.add(imagePreviewBorder);
+	
+	var imgIcon = createInfoIcon({
+		right:"10%",
+		top:20,
+		text:L('infoImage'),
+		win:areaBottom
+	});
 	
 	var addIcon = Titanium.UI.createButton({
 		top:5,
