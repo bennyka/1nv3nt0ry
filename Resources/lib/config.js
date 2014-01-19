@@ -7,7 +7,8 @@ var osname = Ti.Platform.osname,
 	width = Ti.Platform.displayCaps.platformWidth;
 var screensize = require('lib/Screensize');
 var config = {
-	isTablet: screensize.isTablet()
+	isTablet: screensize.isTablet(),
+	showInfo: (Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : Ti.App.Properties.setBool("showInfo",true),
 };
 
 if (config.isTablet) {

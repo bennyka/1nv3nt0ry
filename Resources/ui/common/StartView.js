@@ -16,7 +16,7 @@ function StartView() {
 	
 	var headline = Ti.UI.createLabel({
 		text:Ti.App.name,
-		center:{x:'50%',y:'50%'},
+		center:{x:'50%',y:'60%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"60sp"},
 		color:'#ffffff'
 	});

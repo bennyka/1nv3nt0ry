@@ -61,7 +61,7 @@ function ObjectPreviewView(data) {
 	
 	var headline = Ti.UI.createLabel({
 		text:" "+data.description+" ",
-		center:{x:'50%',y:'65%'},
+		center:{x:'50%',y:'60%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"50sp"},
 		color:'#ffffff'
 	});

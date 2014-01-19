@@ -30,7 +30,7 @@ function InventoryView() {
 	}
 	
 	var headline = Ti.UI.createLabel({
-		text:L('Inventory', 'Inventar'),
+		text:L('inventory'),
 		center:{x:'50%',y:'50%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"60sp"},
 		color:'#ffffff'
@@ -72,7 +72,7 @@ function InventoryView() {
 			bottom:entryName.top,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('created at '+entry.date,'erstellt am '+entry.date),
+			text:L('createdAt')+entry.date,
 			color:'#ffffff',
 			font:{fontSize:'12sp'},
 			touchEnabled:false
@@ -97,7 +97,7 @@ function InventoryView() {
 			top:4,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('Category: '+entry.category,'Kategorie: '+entry.category),
+			text:L('inventoryCategory')+entry.category,
 			color:'#ffffff',
 			font:{fontSize:'10sp'},
 			touchEnabled:false
@@ -108,7 +108,7 @@ function InventoryView() {
 			bottom:entryCategory.top,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('Brand: '+entry.brand,'Marke: '+entry.brand),
+			text:L('inventoryBrand')+entry.brand,
 			color:'#ffffff',
 			font:{fontSize:'10sp'},
 			touchEnabled:false
@@ -154,7 +154,7 @@ function InventoryView() {
 		
 		var btnDelete = Ti.UI.createButton({
 			left:15,
-			title: L('\uE208 Delete', '\uE208 Löschen'),
+			title: '\uE208 '+L('delete'),
 			backgroundColor:'transparent',
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
@@ -182,7 +182,7 @@ function InventoryView() {
 		
 		var btnEdit = Ti.UI.createButton({
 			center:{x:'50%'},
-			title: L('\uE236 Edit', '\uE236 Bearbeiten'),
+			title: '\uE236 '+L('edit'),
 			backgroundColor:'transparent',
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
@@ -200,7 +200,7 @@ function InventoryView() {
 		// send object per mail
 		var btnSend = Ti.UI.createButton({
 			right:15,
-			title: L('\uE422 Send', '\uE422 Senden'),
+			title: '\uE422 '+L('send'),
 			backgroundColor:'transparent',
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
@@ -212,7 +212,7 @@ function InventoryView() {
 		
 		btnSend.addEventListener("click", function(){
 			var email = Ti.UI.createEmailDialog({
-				subject:'Inventory: '+entry.description,
+				subject:Ti.App.name+': '+entry.description,
 				messageBody:getEmail(entry),
 			});
 			if (entry.imgInvoice){
@@ -262,7 +262,6 @@ function InventoryView() {
 	createInventoryList();
 	
 	Ti.App.addEventListener("fillInventoryList",function(){
-		// alert("event");
 		createInventoryList();
 	});
 	return self;

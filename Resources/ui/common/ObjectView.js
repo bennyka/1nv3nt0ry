@@ -120,7 +120,7 @@ function ObjectView(data) {
 	});
 	
 	var headline = Ti.UI.createLabel({
-		text:(editMode) ? L('Edit Object', 'Objekt bearbeiten') : L('add Object','Objekt hinzufügen'),
+		text:(editMode) ? L('editObject') : L('addObject'),
 		center:{x:'50%',y:'60%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"50sp"},
 		color:'#ffffff'
@@ -139,22 +139,22 @@ function ObjectView(data) {
 			id:"serial",
 			width:'55%',
 			type:'textfield',
-			hintText:L('Serial','Seriennummer')+"...",
-			title:L('Serial','Seriennummer')
+			hintText:L('serial')+"...",
+			title:L('serial')
 		},
 		{
 			id:"category",
 			width:'55%',
 			type:'textfield',
-			hintText:L('Category','Kategorie')+"...",
-			title:L('Category','Kategorie')
+			hintText:L('category')+"...",
+			title:L('category')
 		},
 		{
 			id:"brand",
 			width:'55%',
 			type:'textfield',
-			hintText:L('Brand','Marke')+"...",
-			title:L('Brand','Marke'),
+			hintText:L('brand')+"...",
+			title:L('brand'),
 			brandList:[
 				"Sony",
 				"LG",
@@ -166,8 +166,8 @@ function ObjectView(data) {
 			id:"description",
 			width:'80%',
 			type:'textfield',
-			hintText:L('Bezeichnung','Bezeichnung')+"...",
-			title:L('Bezeichnung','Bezeichnung')
+			hintText:L('description')+"...",
+			title:L('description')
 		},
 	];
 

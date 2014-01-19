@@ -14,7 +14,7 @@ function SettingsView() {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L(' back ',' zurück '),
+			title:L('back'),
 			top:25,
 			left:5,
 			color:'#ffffff',
@@ -29,8 +29,8 @@ function SettingsView() {
 	}
 	
 	var headline = Ti.UI.createLabel({
-		text:L('Settings', 'Einstellungen'),
-		center:{x:'50%',y:'50%'},
+		text:L('settings'),
+		center:{x:'50%',y:'60%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"60sp"},
 		color:'#ffffff'
 	});
@@ -46,7 +46,7 @@ function SettingsView() {
 	self.add(areaBottom);
 	
 	var infoLabel = Ti.UI.createLabel({
-		text:L('Show Info Icons', 'Information anzeigen'),
+		text:L('showInfoIcons'),
 		height:'auto',
 		width:'auto',
 		top:45,
@@ -56,7 +56,7 @@ function SettingsView() {
 	areaBottom.add(infoLabel);
 	
 	var infoSwitch = Ti.UI.createSwitch({
-		value:(Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : true,
+		value:Ti.App.config.showInfo,
 		top:40,
 		right:30
 	});
@@ -71,7 +71,7 @@ function SettingsView() {
 		bottom:20,
 		center:{x:'50%'},
 		right:5,
-		width:100,
+		width:Ti.UI.SIZE,
 		height:30,
 		borderColor:'#ffffff',
 		borderWidth:1,
@@ -83,7 +83,7 @@ function SettingsView() {
 	areaBottom.add(btnImprint);
 	
 	var btnImprintTitle = Ti.UI.createLabel({
-		text: L('Imprint','Impressum'),
+		text: L('imprint'),
 		touchEnabled:false,
 		color:'#ffffff',
 		center:{x:'50%',y:'50%'}

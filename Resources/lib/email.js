@@ -1,13 +1,13 @@
 function getEmail(data){
-	var html = "Bezeichnung: "+data.description+"\n";
+	var html = L('inventoryDescription')+data.description+"\n";
 	if (data.brand){
-		html += "Marke: "+data.brand+"\n";
+		html += L('inventoryBrand')+data.brand+"\n";
 	}
 	if (data.category){
-		html += "Kategorie: "+data.category+"\n";
+		html += L('inventoryCategory')+data.category+"\n";
 	}
 	if (data.serial){
-		html += "Seriennummer: "+data.serial+"\n";
+		html += L('inventorySerial')+data.serial+"\n";
 	}
 	return html;
 }
