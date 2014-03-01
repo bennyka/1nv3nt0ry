@@ -2,14 +2,15 @@ Ti.include("/lib/dataHandler.js");
 Ti.include("/lib/email.js");
 function InventoryView() {
 	var self = Ti.UI.createView({
-		backgroundGradient:style.backgroundGradient
+		backgroundGradient:style.backgroundGradient,
+		layout:'vertical'
 	});
 	
 	// ++++++++++++++TOP++++++++++++++
 	var areaTop= Ti.UI.createView({
 		top:0,
 		left:0,
-		height:"20%"
+		height:"17%"
 	});
 	self.add(areaTop);
 	
@@ -27,7 +28,7 @@ function InventoryView() {
 			self.fireEvent("shouldCloseView");
 		});
 		areaTop.add(btnBack);
-	}
+	} 
 	
 	var headline = Ti.UI.createLabel({
 		text:L('inventory'),
@@ -37,10 +38,76 @@ function InventoryView() {
 	});
 	areaTop.add(headline);
 	
+	// +++++++++ SEARCH ++++++++	
+	var searchView = Ti.UI.createView({
+		height:Ti.UI.SIZE,
+		width: Ti.UI.SIZE
+	});
+	self.add(searchView);
+	
+	var searchBar = Ti.UI.createTextField({
+		width:(Ti.Platform.getOsname() == "android") ? '90%' : Ti.UI.FILL,
+		left:(Ti.Platform.getOsname() == "android") ? '1%' : undefined,
+		backgroundColor:'#20ffffff',
+		hintText:'Suche...',
+		paddingLeft:10,
+		paddingRight:35,
+		autocorrect:false,
+		color:'#ffffff'
+	});
+	searchView.add(searchBar);
+	
+	searchBar.addEventListener('focus', function(e){
+		e.source.setValue('');
+	});
+	
+	searchBar.addEventListener('return', function(e){
+		listSearch(e.source.getValue());
+	});
+	
+	searchBar.addEventListener('change', function(e){
+		listSearch(e.source.getValue());
+	});
+	
+	var btnSearch = Ti.UI.createButton({
+		right:6,
+		title: '\uE028',
+		backgroundColor:'transparent',
+		style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+		color: '#ffffff',
+		selectedColor: '#994c616e',
+		font: {fontFamily: style.iconFontFamily, fontSize: '13sp'},
+	});
+	if (Ti.Platform.getOsname() == "android"){
+		searchView.add(btnSearch);
+	} else {
+		searchBar.add(btnSearch);
+	};
+	
+	btnSearch.addEventListener('click', function(){
+		var keyword = searchBar.getValue();
+		if (!keyword){
+			searchBar.focus();
+		} else {
+			listSearch(keyword);
+		}
+		
+	});
+	
+	// +++++++++ LIST ++++++++	
+	var inventoryList = Ti.UI.createScrollView({
+		layout:'vertical',
+		top:3,
+		bottom:'30'
+	});
+	self.add(inventoryList);
+	// ++++++++++++++++++++++++++++ FUNCTIONS ++++++++++++++++++++++++++++
+	
 	// ++++++++++++++REST OF PAGE++++++++++++++
 	function createInventoryEntry(entry){
 		var objectContainer = Ti.UI.createView({
 			height:150,
+			keywordString: String(entry.description+', '+entry.date+', '+entry.category+', '+entry.brand)
 		});
 		
 		// ++++++++++++++entryName & entryDate++++++++++++++
@@ -187,8 +254,7 @@ function InventoryView() {
 			style: Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
 			color: '#ffffff',
 			selectedColor: '#994c616e',
-			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'},
-			
+			font: {fontFamily: style.iconFontFamily, fontSize: '11sp'}
 		});
 		background3.add(btnEdit);
 		
@@ -240,13 +306,6 @@ function InventoryView() {
 		return objectContainer;
 	};
 	
-	var inventoryList = Ti.UI.createScrollView({
-		layout:'vertical',
-		top:'20%',
-		bottom:'30'
-	});
-	self.add(inventoryList);
-	
 	function createInventoryList(){
 		if (inventoryList.getChildren()){
 			inventoryList.removeAllChildren();
@@ -260,6 +319,19 @@ function InventoryView() {
 		}
 	}
 	createInventoryList();
+	
+	function listSearch(keyword){
+		var entrys = inventoryList.getChildren();
+		if (keyword){
+			for (i in entrys){
+				if (entrys[i].keywordString.indexOf(keyword) < 0){
+					inventoryList.remove(entrys[i]);
+				};
+			};
+		} else {
+			createInventoryList();
+		}
+	};
 	
 	Ti.App.addEventListener("fillInventoryList",function(){
 		createInventoryList();
