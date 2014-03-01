@@ -56,14 +56,13 @@ function SettingsView() {
 	areaBottom.add(infoLabel);
 	
 	var infoSwitch = Ti.UI.createSwitch({
-		value:Ti.App.config.showInfo,
+		value:Ti.App.Properties.getBool("showInfo"),
 		top:40,
 		right:30
 	});
 	areaBottom.add(infoSwitch);
 	
 	infoSwitch.addEventListener('change',function(e){
-	  Ti.App.showInfo = e.value;
 	  Ti.App.Properties.setBool("showInfo", e.value);
 	});
 	

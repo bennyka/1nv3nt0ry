@@ -165,7 +165,7 @@ function StartView() {
 		bottom:2
 	});
 	areaBottom.add(btnSettingsTitle);
-
+	
 	return self;
 };
 

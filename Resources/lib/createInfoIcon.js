@@ -1,6 +1,7 @@
 
 function createInfoIcon(data){
-	if (Ti.App.config.showInfo){
+	var showInfo = (Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : Ti.App.Properties.setBool("showInfo",true);
+	if (showInfo){
 		var btnInfo = Ti.UI.createButton({
 			top:(data.top) ? data.top : null,
 			left:(data.left) ? data.left : null,
