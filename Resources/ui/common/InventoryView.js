@@ -105,9 +105,12 @@ function InventoryView() {
 	
 	// ++++++++++++++REST OF PAGE++++++++++++++
 	function createInventoryEntry(entry){
+		var keywordString = String(entry.description+', '+entry.date+', '+entry.category+', '+entry.brand).toLowerCase();
 		var objectContainer = Ti.UI.createView({
 			height:150,
-			keywordString: String(entry.description+', '+entry.date+', '+entry.category+', '+entry.brand)
+			visible:true,
+			removed:false,
+			keywordString:keywordString
 		});
 		
 		// ++++++++++++++entryName & entryDate++++++++++++++
@@ -128,7 +131,7 @@ function InventoryView() {
 			top:2,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:entry.description,
+			text:objectContainer.keywordString,//entry.description,
 			color:'#ffffff',
 			font:{fontWeight:'bold'},
 			touchEnabled:false
@@ -305,7 +308,7 @@ function InventoryView() {
 		
 		return objectContainer;
 	};
-	
+	var list;
 	function createInventoryList(){
 		if (inventoryList.getChildren()){
 			inventoryList.removeAllChildren();
@@ -313,26 +316,45 @@ function InventoryView() {
 		
 		var entrys = loadData();
 		for (i in entrys){
-			var entry = createInventoryEntry(entrys[i]);
-			
+			var entry = createInventoryEntry(entrys[i]);	
 			inventoryList.add(entry);
-		}
+		};
+		if (!list){
+			list = inventoryList.getChildren();
+		};
 	}
 	createInventoryList();
 	
-	function listSearch(keyword){
-		var entrys = inventoryList.getChildren();
-		if (keyword){
-			for (i in entrys){
-				if (entrys[i].keywordString.indexOf(keyword) < 0){
-					inventoryList.remove(entrys[i]);
-				};
+	function refreshList(){
+		headline.text = String(inventoryList.getChildren().length);
+		for (i in list){
+			if (list[i].removed && list[i].visible){
+				inventoryList.add(list[i]);
 			};
-		} else {
-			createInventoryList();
 		}
+		headline.text = String("after: "+inventoryList.getChildren().length);
+	}
+
+	function listSearch(keyword){
+		if (keyword){
+			for (i in list){
+				if(list[i].keywordString.indexOf(keyword) >= 0){
+					list[i].visible = true;
+					list[i].removed = false;
+				} else {
+					list[i].visible = false;
+					list[i].removed = true;
+				};
+			}
+		} else {
+			for (i in list && inventoryList.getChildren.length <= list.length){
+				list[i].visible = true;
+				list[i].removed = true;
+			};
+		}
+		refreshList();
 	};
-	
+
 	Ti.App.addEventListener("fillInventoryList",function(){
 		createInventoryList();
 	});
