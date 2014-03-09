@@ -16,7 +16,7 @@ function InventoryView() {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L(' back ',' zurück '),
+			title:L('back'),
 			top:25,
 			left:5,
 			color:'#ffffff',
@@ -90,8 +90,7 @@ function InventoryView() {
 			searchBar.focus();
 		} else {
 			listSearch(keyword);
-		}
-		
+		};
 	});
 	
 	// +++++++++ LIST ++++++++	
@@ -326,9 +325,12 @@ function InventoryView() {
 	createInventoryList();
 	
 	function refreshList(){
+		if (inventoryList.getChildren()){
+			inventoryList.removeAllChildren();
+		};
 		headline.text = String(inventoryList.getChildren().length);
 		for (i in list){
-			if (list[i].removed && list[i].visible){
+			if (list[i].visible){
 				inventoryList.add(list[i]);
 			};
 		}
@@ -336,7 +338,7 @@ function InventoryView() {
 	}
 
 	function listSearch(keyword){
-		if (keyword){
+		if (keyword && keyword != null && keyword != ''){
 			for (i in list){
 				if(list[i].keywordString.indexOf(keyword) >= 0){
 					list[i].visible = true;
