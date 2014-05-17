@@ -29,6 +29,52 @@ function InventoryView() {
 		});
 		areaTop.add(btnBack);
 	} 
+	if (Ti.Platform.getOsname() == "android"){
+		var btnExport = Ti.UI.createView({
+			top:20,
+			right:5,
+			width:Ti.UI.SIZE,
+			height:30,
+			borderColor:'#ffffff',
+			borderWidth:1,
+			borderRadius:5,
+			color:'#ffffff',
+			backgroundImage:'transparent',
+			zIndex:10
+		});
+		
+		var btnExportTitle = Ti.UI.createLabel({
+			text: " "+L('export')+" ",
+			touchEnabled:false,
+			color:'#ffffff',
+			center:{x:'50%',y:'50%'}
+		});
+		btnExport.add(btnExportTitle);
+	} else {
+		var btnExport = Ti.UI.createButton({
+			title:L('export'),
+			top:25,
+			right:5,
+			color:'#ffffff',
+			borderColor:'#ffffff',
+			borderWidth:1,
+			borderRadius:5
+		});
+	}
+	areaTop.add(btnExport);
+	
+	btnExport.addEventListener("click", function(e){
+		var csvFile = exportAll();
+
+		var email = Ti.UI.createEmailDialog({
+			subject:Ti.App.name+': Mein Inventar'
+		});
+		
+		email.addAttachment(csvFile);
+		email.toRecipients = ['benny90.ka@gmail.com'];
+		email.open();
+	});
+	
 	
 	var headline = Ti.UI.createLabel({
 		text:L('inventory'),
@@ -130,7 +176,7 @@ function InventoryView() {
 			top:2,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:objectContainer.keywordString,//entry.description,
+			text:entry.description,
 			color:'#ffffff',
 			font:{fontWeight:'bold'},
 			touchEnabled:false
@@ -184,6 +230,7 @@ function InventoryView() {
 		});
 		background2.add(entryBrand);
 		// ++++++++++++++Bild++++++++++++++
+		Ti.API.error("image",entry.imgObject);
 		var entryImage = Ti.UI.createImageView({
 			top:8,
 			left:18,
@@ -283,6 +330,8 @@ function InventoryView() {
 				subject:Ti.App.name+': '+entry.description,
 				messageBody:getEmail(entry),
 			});
+			
+			
 			if (entry.imgInvoice){
 				var imgFile = Ti.Filesystem.getFile(entry.imgInvoice);
 				email.addAttachment(imgFile);
@@ -291,8 +340,8 @@ function InventoryView() {
 				var objFile = Ti.Filesystem.getFile(entry.imgObject);
 				email.addAttachment(objFile);
 			};
-			var txtFile = Ti.Filesystem.getFile(entry.txtFile);
-			email.addAttachment(txtFile);
+			var csvFile = Ti.Filesystem.getFile(entry.csvFile);
+			email.addAttachment(csvFile);
 			email.open();
 		});
 		
@@ -328,13 +377,11 @@ function InventoryView() {
 		if (inventoryList.getChildren()){
 			inventoryList.removeAllChildren();
 		};
-		headline.text = String(inventoryList.getChildren().length);
 		for (i in list){
 			if (list[i].visible){
 				inventoryList.add(list[i]);
 			};
 		}
-		headline.text = String("after: "+inventoryList.getChildren().length);
 	}
 
 	function listSearch(keyword){
@@ -360,6 +407,10 @@ function InventoryView() {
 	Ti.App.addEventListener("fillInventoryList",function(){
 		createInventoryList();
 	});
+	if (Ti.Platform.getOsname() == "android"){
+		Ti.UI.Android.hideSoftKeyboard();
+	};
+	
 	return self;
 };
 

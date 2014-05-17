@@ -38,10 +38,7 @@ function saveData(data){
 			};
 			objImageFile.write(data.imgObject);
 		}
-		
-		Ti.API.error("IMAGE",data.imgObject);
-		// Ti.API.error("IMAGE",objImageFile.exists());
-		Ti.API.error("IMAGE",objImageFile.getNativePath());
+
 		
 		if (data.imgInvoice){
 			var invoiceImgFile = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
@@ -62,15 +59,15 @@ function saveData(data){
 		};
 		
 		var dataString = "";
-			dataString = "Bezeichnung;Marke;Kategorie;Datum;Seriennummer;Rechnung; Bild;";
+			dataString = "Bezeichnung;Marke;Kategorie;Datum;Seriennummer;";
 			dataString += "\n";
 			dataString += ((data.description) ? data.description : "") + ";";
 			dataString += ((data.brand) ? data.brand : "") + ";";
 			dataString += ((data.category) ? data.category : "") + ";";
 			dataString += ((data.date) ? data.date : "") + ";";
 			dataString += ((data.serial) ? data.serial : "") + ";";
-			dataString += ((data.imgInvoice) ? data.imgInvoice : "") + ";";
-			dataString += ((data.imgObject) ? data.imgObject : "") + ";";
+			// dataString += ((data.imgInvoice) ? data.imgInvoice : "") + ";";
+			// dataString += ((data.imgObject) ? data.imgObject : "") + ";";
 		csvFile.write(dataString);
 		
 		var dataObj = {
@@ -92,6 +89,45 @@ function saveData(data){
 		Ti.App.Properties.setList("maserList", masterList);
 	}
 }
+
+function exportAll(){
+	var csvFile = Ti.Filesystem.getFile(generalDir, 'Meine Inventar.csv');
+	if (!csvFile.exists() && Ti.Platform.getOsname() != "android"){
+		csvFile.createFile();
+	};
+	
+	var dataString = "";
+		dataString = "Bezeichnung;Marke;Kategorie;Datum;Seriennummer;";
+		dataString += "\n";
+	
+	if (masterList && masterList.length > 0){
+		for (i in masterList){
+			var file = Ti.Filesystem.getFile(generalDir, masterList[i]+'.txt');
+			if (file.exists()){
+				var json = file.read();
+				var data = JSON.parse(json);
+					
+				dataString += ((data.description) ? data.description : "") + ";";
+				dataString += ((data.brand) ? data.brand : "") + ";";
+				dataString += ((data.category) ? data.category : "") + ";";
+				dataString += ((data.date) ? data.date : "") + ";";
+				dataString += ((data.serial) ? data.serial : "") + ";";
+				dataString += "\n";
+			}
+		}
+	} else {
+		 var dialog = Ti.UI.createAlertDialog({
+		    message: 'Keine Daten vorhanden',
+		    ok: 'Okay',
+		    title: 'Hinweis'
+		  }).show();
+	}
+		
+	csvFile.write(dataString);
+	
+	return csvFile;
+};
+
 
 function loadData(){
 	var itemList = [];
