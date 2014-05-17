@@ -3,8 +3,8 @@ function SettingsView() {
 	var self = Ti.UI.createView({
 		backgroundGradient:style.backgroundGradient
 	});
-	
-	// ++++++++++++++TOP++++++++++++++
+// 	
+	// // ++++++++++++++TOP++++++++++++++
 	var areaTop= Ti.UI.createView({
 		top:0,
 		left:0,
@@ -56,7 +56,7 @@ function SettingsView() {
 	areaBottom.add(infoLabel);
 	
 	var infoSwitch = Ti.UI.createSwitch({
-		value:Ti.App.Properties.getBool("showInfo"),
+		value:(Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : true,
 		top:40,
 		right:30
 	});
@@ -94,8 +94,8 @@ function SettingsView() {
 		var imprintView = new ImprintView();
 		imprintView.open();
 	});
-	
-	Ti.include(Ti.Filesystem.getResourcesDirectory()+'/lib/getDeviceInformation.js');
+
+	Ti.include(Ti.Filesystem.getResourcesDirectory()+'/lib/getDeviceInformation.js');	
 	
 	return self;
 };

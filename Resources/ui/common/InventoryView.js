@@ -103,6 +103,12 @@ function InventoryView() {
 	});
 	searchView.add(searchBar);
 	
+	if (Ti.Platform.getOsname() == "android"){
+		setTimeout(function(){
+			searchBar.blur();
+		},250);
+	}
+	
 	searchBar.addEventListener('focus', function(e){
 		e.source.setValue('');
 	});
