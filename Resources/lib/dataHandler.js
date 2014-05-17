@@ -30,25 +30,49 @@ function saveData(data){
 	
 	if (data.id){
 		//save object image 
-		if (data.image){
+		
+		if (data.imgObject){
 			var objImageFile = Ti.Filesystem.getFile(generalDir, data.id+'.png');
 			if (!objImageFile.exists() && Ti.Platform.getOsname() != "android"){
 				objImageFile.createFile();
 			};
-			objImageFile.write(data.image);
+			objImageFile.write(data.imgObject);
 		}
-		if (data.imageInvoice){
+		
+		Ti.API.error("IMAGE",data.imgObject);
+		// Ti.API.error("IMAGE",objImageFile.exists());
+		Ti.API.error("IMAGE",objImageFile.getNativePath());
+		
+		if (data.imgInvoice){
 			var invoiceImgFile = Ti.Filesystem.getFile(generalDir, data.id+'_invoice.png');
 			if (!invoiceImgFile.exists() && Ti.Platform.getOsname() != "android"){
 				invoiceImgFile.createFile();
 			};
-			invoiceImgFile.write(data.imageInvoice);
+			invoiceImgFile.write(data.imgInvoice);
 		}
 		
 		var txtFile = Ti.Filesystem.getFile(generalDir, data.id+'.txt');
 		if (!txtFile.exists() && Ti.Platform.getOsname() != "android"){
 			txtFile.createFile();
 		};
+		
+		var csvFile = Ti.Filesystem.getFile(generalDir, data.description+'.csv');
+		if (!csvFile.exists() && Ti.Platform.getOsname() != "android"){
+			csvFile.createFile();
+		};
+		
+		var dataString = "";
+			dataString = "Bezeichnung;Marke;Kategorie;Datum;Seriennummer;Rechnung; Bild;";
+			dataString += "\n";
+			dataString += ((data.description) ? data.description : "") + ";";
+			dataString += ((data.brand) ? data.brand : "") + ";";
+			dataString += ((data.category) ? data.category : "") + ";";
+			dataString += ((data.date) ? data.date : "") + ";";
+			dataString += ((data.serial) ? data.serial : "") + ";";
+			dataString += ((data.imgInvoice) ? data.imgInvoice : "") + ";";
+			dataString += ((data.imgObject) ? data.imgObject : "") + ";";
+		csvFile.write(dataString);
+		
 		var dataObj = {
 				"id":(data.id) ? data.id : null,
 				"date":(data.date) ? data.date : null,
@@ -57,12 +81,13 @@ function saveData(data){
 				"description":(data.description) ? data.description : null,
 				"serial":(data.serial) ? data.serial : null,
 				"txtFile":txtFile.nativePath,
-				"imgInvoice":(data.imageInvoice) ? invoiceImgFile.nativePath : null,
-				"imgObject":(data.image) ? objImageFile.nativePath : null
+				"csvFile":csvFile.nativePath,
+				"imgInvoice":(data.imgInvoice) ? invoiceImgFile.nativePath : null,
+				"imgObject":(data.imgObject) ? objImageFile.nativePath : null
 		};
-		
 		var json = JSON.stringify(dataObj);
 		txtFile.write(json);
+		
 		masterList.push(data.id);
 		Ti.App.Properties.setList("maserList", masterList);
 	}
@@ -106,7 +131,7 @@ function updateData(data){
 	for (i in masterList){
 		if (data.id == masterList[i]){
 			// update txt file
-			var file = Ti.Filesystem.getFile(generalDir, masterList[i]+'.txt');
+			// var file = Ti.Filesystem.getFile(generalDir, masterList[i]+'.txt');
 			var string = file.read();
 			var json = JSON.parse(string);
 			json.description = (data.description) ? data.description : json.description;
