@@ -94,7 +94,9 @@ function SettingsView() {
 		var imprintView = new ImprintView();
 		imprintView.open();
 	});
-
+	
+	Ti.include(Ti.Filesystem.getResourcesDirectory()+'/lib/getDeviceInformation.js');
+	
 	return self;
 };
 
