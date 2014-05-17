@@ -16,6 +16,11 @@ var osname = Ti.Platform.osname;
         h = Ti.Platform.displayCaps.platformHeight / dpi,
         diagonalSize = Math.sqrt(w*w+h*h);
 
+exports.getDiagonalSize = function(diagonalInches) {
+       var size = String(Ti.Platform.displayCaps.platformHeight+"x"+Ti.Platform.displayCaps.platformWidth);
+       return size;
+};
+
 exports.isTablet = function(diagonalInches) {
         /*
                 Returns Boolean, true = device is a tablet
