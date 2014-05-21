@@ -193,7 +193,7 @@ function InventoryView() {
 			bottom:entryName.top,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('createdAt')+entry.date,
+			text:L('createdAt')+": "+entry.date,
 			color:'#ffffff',
 			font:{fontSize:'12sp'},
 			touchEnabled:false
@@ -218,7 +218,7 @@ function InventoryView() {
 			top:4,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('inventoryCategory')+entry.category,
+			text:L('inventoryCategory')+": "+entry.category,
 			color:'#ffffff',
 			font:{fontSize:'10sp'},
 			touchEnabled:false
@@ -229,7 +229,7 @@ function InventoryView() {
 			bottom:entryCategory.top,
 			height:Ti.UI.SIZE,
 			left:"40%",
-			text:L('inventoryBrand')+entry.brand,
+			text:L('inventoryBrand')+": "+entry.brand,
 			color:'#ffffff',
 			font:{fontSize:'10sp'},
 			touchEnabled:false

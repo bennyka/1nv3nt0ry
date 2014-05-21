@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<!-- General -->
-	<string name="back"> zurück </string>
-	<string name="save"> speichern </string>
+	<string name="back">Zurück</string>
+	<string name="save">Speichern</string>
 	
 	<!-- startView -->
-	<string name="inventory"> Inventar </string>
-	<string name="createObject"> Neues Objekt \n anlegen </string>
-	<string name="settings"> Einstellungen </string>
+	<string name="inventory">Inventar</string>
+	<string name="createObject">Neues Objekt \n anlegen</string>
+	<string name="settings">Einstellungen</string>
 
 	<!-- settingsView -->
-	<string name="imprint"> Impressum </string>
+	<string name="imprint">Impressum</string>
 	
 	<!-- ObjectView -->
 	<string name="createObjectHeadline">Neues Objekt</string>
@@ -23,15 +23,15 @@
 	<string name="infoInvoice">Laden Sie ein Foto Ihrer Rechnung hoch</string>
 	<string name="infoScan">Scannen Sie ihr Produkt einfach ein</string>
 	<string name="infoImage">Laden Sie ein Foto des Gegenstandes hoch</string>
-	<string name="addObject"> Objekt hinzufügen </string>
-	<string name="editObject"> Objekt bearbeiten </string>
+	<string name="addObject">Objekt hinzufügen</string>
+	<string name="editObject">Objekt bearbeiten</string>
 	
 	<!-- InventoryView -->
-	<string name="createdAt">erstellt am </string>
-	<string name="inventoryCategory">Kategorie: </string>
-	<string name="inventoryBrand">Marke: </string>
-	<string name="inventorySerial">Seriennummer: </string>
-	<string name="inventoryDescription">Beschreibung: </string>
+	<string name="createdAt">Erstellt am</string>
+	<string name="inventoryCategory">Kategorie</string>
+	<string name="inventoryBrand">Marke</string>
+	<string name="inventorySerial">Seriennummer</string>
+	<string name="inventoryDescription">Beschreibung</string>
 	<string name="edit">Bearbeiten</string>
 	<string name="send">Senden</string>
 	<string name="delete">Löschen</string>

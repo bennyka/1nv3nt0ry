@@ -37,7 +37,7 @@ function ObjectView(data) {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L('back'),
+			title:" "+L('back')+" ",
 			top:20,
 			left:5,
 			color:'#ffffff',
@@ -65,7 +65,7 @@ function ObjectView(data) {
 	});
 	
 	var btnSaveTitle = Ti.UI.createLabel({
-		text: L('save'),
+		text: " "+L('save')+" ",
 		touchEnabled:false,
 		color:'#ffffff',
 		center:{x:'50%',y:'50%'}
@@ -140,21 +140,21 @@ function ObjectView(data) {
 			width:'55%',
 			type:'textfield',
 			hintText:L('serial')+"...",
-			title:L('serial')
+			title:L('serial')+": "
 		},
 		{
 			id:"category",
 			width:'55%',
 			type:'textfield',
 			hintText:L('category')+"...",
-			title:L('category')
+			title:L('category')+": "
 		},
 		{
 			id:"brand",
 			width:'55%',
 			type:'textfield',
 			hintText:L('brand')+"...",
-			title:L('brand'),
+			title:L('brand')+": ",
 			brandList:[
 				"Sony",
 				"LG",
@@ -167,7 +167,7 @@ function ObjectView(data) {
 			width:'80%',
 			type:'textfield',
 			hintText:L('description')+"...",
-			title:L('description')
+			title:L('description')+": "
 		},
 	];
 
