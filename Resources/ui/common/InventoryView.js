@@ -52,7 +52,7 @@ function InventoryView() {
 		btnExport.add(btnExportTitle);
 	} else {
 		var btnExport = Ti.UI.createButton({
-			title:L('export'),
+			title: " "+L('export')+" ",
 			top:25,
 			right:5,
 			color:'#ffffff',
@@ -236,7 +236,6 @@ function InventoryView() {
 		});
 		background2.add(entryBrand);
 		// ++++++++++++++Bild++++++++++++++
-		Ti.API.error("image",entry.imgObject);
 		var entryImage = Ti.UI.createImageView({
 			top:8,
 			left:18,
@@ -401,8 +400,9 @@ function InventoryView() {
 					list[i].removed = true;
 				};
 			}
-		} else {
-			for (i in list && inventoryList.getChildren.length <= list.length){
+		} else if (inventoryList.getChildren().length < list.length) {
+			
+			for ( i in list ){
 				list[i].visible = true;
 				list[i].removed = true;
 			};
