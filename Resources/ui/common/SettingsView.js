@@ -14,7 +14,7 @@ function SettingsView() {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L('back'),
+			title:' '+L('back')+' ',
 			top:25,
 			left:5,
 			color:'#ffffff',
@@ -82,7 +82,7 @@ function SettingsView() {
 	areaBottom.add(btnImprint);
 	
 	var btnImprintTitle = Ti.UI.createLabel({
-		text: L('imprint'),
+		text: ' '+L('imprint')+' ',
 		touchEnabled:false,
 		color:'#ffffff',
 		center:{x:'50%',y:'50%'}

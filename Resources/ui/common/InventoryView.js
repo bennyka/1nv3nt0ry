@@ -16,7 +16,7 @@ function InventoryView() {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L('back'),
+			title:' '+L('back')+' ',
 			top:25,
 			left:5,
 			color:'#ffffff',
@@ -95,7 +95,7 @@ function InventoryView() {
 		width:(Ti.Platform.getOsname() == "android") ? '90%' : Ti.UI.FILL,
 		left:(Ti.Platform.getOsname() == "android") ? '1%' : undefined,
 		backgroundColor:'#20ffffff',
-		hintText:'Suche...',
+		hintText:L('search')+'...',
 		paddingLeft:10,
 		paddingRight:35,
 		autocorrect:false,
@@ -184,7 +184,7 @@ function InventoryView() {
 			left:"40%",
 			text:entry.description,
 			color:'#ffffff',
-			font:{fontWeight:'bold'},
+			font:{fontWeight:'bold', fontSize:'13sp'},
 			touchEnabled:false
 		});
 		background1.add(entryName);
@@ -195,7 +195,7 @@ function InventoryView() {
 			left:"40%",
 			text:L('createdAt')+": "+entry.date,
 			color:'#ffffff',
-			font:{fontSize:'12sp'},
+			font:{fontSize:'11sp'},
 			touchEnabled:false
 		});
 		background1.add(entryCreationDate);
@@ -220,7 +220,7 @@ function InventoryView() {
 			left:"40%",
 			text:L('inventoryCategory')+": "+entry.category,
 			color:'#ffffff',
-			font:{fontSize:'10sp'},
+			font:{fontSize:'11sp'},
 			touchEnabled:false
 		});
 		background2.add(entryCategory);
@@ -231,7 +231,7 @@ function InventoryView() {
 			left:"40%",
 			text:L('inventoryBrand')+": "+entry.brand,
 			color:'#ffffff',
-			font:{fontSize:'10sp'},
+			font:{fontSize:'11sp'},
 			touchEnabled:false
 		});
 		background2.add(entryBrand);

@@ -36,6 +36,7 @@
 	<string name="send">Senden</string>
 	<string name="delete">Löschen</string>
 	<string name="export">Export</string>
+	<string name="search">Suche</string>
 	
 	<!-- SettingsView -->
 	<string name="showInfoIcon">Show Info Icons</string>

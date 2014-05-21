@@ -14,7 +14,7 @@ function ImprintView() {
 	
 	if (Ti.Platform.getOsname() != "android"){
 		var btnBack = Ti.UI.createButton({
-			title:L('back'),
+			title:' '+L('back')+' ',
 			top:25,
 			left:5,
 			color:'#ffffff',
@@ -29,7 +29,7 @@ function ImprintView() {
 	}
 	
 	var headline = Ti.UI.createLabel({
-		text:L('imprint'),
+		text:' '+L('imprint')+' ',
 		center:{x:'50%',y:'50%'},
 		font: {fontFamily: style.specialFontFamily, fontSize:"60sp"},
 		color:'#ffffff'
