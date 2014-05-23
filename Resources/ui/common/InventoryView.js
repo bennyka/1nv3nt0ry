@@ -71,7 +71,6 @@ function InventoryView() {
 		});
 		
 		email.addAttachment(csvFile);
-		email.toRecipients = ['benny90.ka@gmail.com'];
 		email.open();
 	});
 	
