@@ -39,5 +39,8 @@
 	<string name="search">Suche</string>
 	
 	<!-- SettingsView -->
-	<string name="showInfoIcon">Show Info Icons</string>
+	<string name="showInfoIcon">Hilfe anzeigen</string>
+	<string name="handleInputFields">Eingabefelder</string>
+	<string name="ObjectStatus">Gegenstand Status (bspw. Verliehen)</string>
+	<string name="ObjectPrice">Anschaffungspreis</string>
 </resources>

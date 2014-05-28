@@ -39,5 +39,7 @@
 	
 	<!-- SettingsView -->
 	<string name="showInfoIcon">Show Information</string>
-	
+	<string name="handleInputFields">Inputfields</string>
+	<string name="ObjectStatus">Object Status</string>
+	<string name="ObjectPrice">Price</string>
 </resources>
