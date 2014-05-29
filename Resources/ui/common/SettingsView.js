@@ -16,7 +16,7 @@ function SettingsView() {
 		var btnBack = Ti.UI.createButton({
 			title:' '+L('back')+' ',
 			top:25,
-			left:5,
+			left:10,
 			color:'#ffffff',
 			borderColor:'#ffffff',
 			borderWidth:1,
@@ -41,33 +41,66 @@ function SettingsView() {
 		top:"25%",
 		left:0,
 		height:"50%",
+		layout:'horizontal',
 		backgroundColor:style.whiteTransparentBackground
 	});
 	self.add(areaBottom);
+	// add info switch
+	switcher = [
+		{
+			text:L('showInfoIcon'),
+			status: (Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : true,
+			property:"showInfo"
+		},
+		{
+			text:L('handleInputFields'),
+			status: null,
+			property:null
+		},
+		{
+			text:L('ObjectStatus'),
+			status: (Ti.App.Properties.hasProperty("objectStatus")) ? Ti.App.Properties.getBool("objectStatus") : false,
+			property:"objectStatus"
+		},
+		{
+			text:L('ObjectPrice'),
+			status: (Ti.App.Properties.hasProperty("objectPrice")) ? Ti.App.Properties.getBool("objectPrice") : false,
+			property:"objectPrice"
+		},
+	];
+	for (i in switcher){
+		var bg = Ti.UI.createView({
+			top:15,
+			width:Ti.UI.FILL,
+			height:Ti.UI.SIZE
+		});
+		areaBottom.add(bg);
+		
+		var infoLabel = Ti.UI.createLabel({
+			text:switcher[i].text,
+			height:'auto',
+			width:'auto',
+			left:10,
+			color:'#ffffff'
+		});
+		bg.add(infoLabel);
+		if (switcher[i].property){
+			var infoSwitch = Ti.UI.createSwitch({
+				value:switcher[i].status,
+				right:30,
+				property:switcher[i].property,
+			});
+			bg.add(infoSwitch);
+			
+			infoSwitch.addEventListener('change',function(e){
+				Ti.App.Properties.setBool(e.source.property, e.value);			
+			});
+		}
+	};
 	
-	var infoLabel = Ti.UI.createLabel({
-		text:L('showInfoIcon'),
-		height:'auto',
-		width:'auto',
-		top:45,
-		left:10,
-		color:'#ffffff'
-	});
-	areaBottom.add(infoLabel);
-	
-	var infoSwitch = Ti.UI.createSwitch({
-		value:(Ti.App.Properties.hasProperty("showInfo")) ? Ti.App.Properties.getBool("showInfo") : true,
-		top:40,
-		right:30
-	});
-	areaBottom.add(infoSwitch);
-	
-	infoSwitch.addEventListener('change',function(e){
-	  Ti.App.Properties.setBool("showInfo", e.value);
-	});
 	
 	var btnImprint = Ti.UI.createView({
-		bottom:20,
+		top:15,
 		center:{x:'50%'},
 		right:5,
 		width:Ti.UI.SIZE,
