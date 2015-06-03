@@ -15,12 +15,12 @@
     <publisher>bennyka</publisher>
     <url>http://</url>
     <description>not specified</description>
-    <copyright>2013 by bennyka</copyright>
+    <copyright>2014 by bennyka</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
+    <statusbar-hidden>true</statusbar-hidden>
     <fullscreen>true</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>

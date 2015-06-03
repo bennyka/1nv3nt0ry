@@ -178,6 +178,7 @@ function ObjectView(data) {
 				var textfield = Ti.UI.createTextField({
 					bottom:(20 + (50*i)),
 					left:"10%",
+					height:20,
 					width:inputField[i].width,
 					paddingLeft:4,
 					paddingRight:4,
@@ -229,7 +230,7 @@ function ObjectView(data) {
 				
 				var textfieldTitle = Ti.UI.createLabel({
 					text:inputField[i].title,
-					bottom:(37 + (50*i)),
+					bottom:(43 + (50*i)),
 					width:100,
 					left:"10%",
 					visible:(Ti.Platform.getOsname() != "android") ? true : false,

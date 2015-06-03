@@ -167,8 +167,8 @@ function updateData(data){
 	for (i in masterList){
 		if (data.id == masterList[i]){
 			// update txt file
-			// var file = Ti.Filesystem.getFile(generalDir, masterList[i]+'.txt');
-			var string = file.read();
+			var txtFile = Ti.Filesystem.getFile(generalDir, data.id+'.txt');
+			var string = txtFile.read();
 			var json = JSON.parse(string);
 			json.description = (data.description) ? data.description : json.description;
 			json.brand = (data.brand) ? data.brand : json.brand;
@@ -206,7 +206,7 @@ function updateData(data){
 			
 			
 			string = JSON.stringify(json);
-			file.write(string);
+			txtFile.write(string);
 		}
 	}
 }
