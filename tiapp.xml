@@ -8,7 +8,7 @@
         <target device="blackberry">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>3.2.2.GA</sdk-version>
+    <sdk-version>3.4.0.GA</sdk-version>
     <id>de.bk.inventory</id>
     <name>Inventory</name>
     <version>1.0</version>
@@ -24,7 +24,7 @@
     <fullscreen>true</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
-    <guid>0893f9a1-45d1-4b07-9446-74c67e2c27e9</guid>
+    <guid>92c2829f-4c85-4ba9-83e6-2280d347f0d7</guid>
     <property name="ti.ui.defaultunit">dip</property>
     <iphone>
         <orientations device="iphone">

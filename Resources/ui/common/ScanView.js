@@ -15,28 +15,39 @@ function ScanView(){
     // Set callback functions for when scanning succeedes and for when the 
     // scanning is canceled.
     picker.setSuccessCallback(function(e) {
-        alert("success (" + e.symbology + "): " + e.barcode);
+        // if (e.symbology.indexOf('EAN') < 0){
+        	// alert("no EAN code!");
+        	// return;
+        // }	
+        // alert(JSON.stringify(e));
+        	var amazon = require('/lib/amazonLib/index');
+
+			var client = amazon.createClient({
+			  awsTag: process.env.AWS_TAG,
+			  awsId: process.env.AWS_ID,
+			  awsSecret: process.env.AWS_SECRET
+			});
+			
+			client.itemSearch({
+			  keywords: e.barcode,
+			  searchIndex: '',
+			  responseGroup: 'ItemAttributes,Offers,Images'
+			}, function(err, results) {
+			  if (err) {
+			    alert(err);
+			  } else {
+			    alert(results);
+			  }
+			});
+        	
+        
+       
     });
     picker.setCancelCallback(function(e) {
         closeScanner();
     });
     self.add(picker);
-    // window.addEventListener('open', function(e) {
-        // // Adjust to the current orientation.
-        // // since window.orientation returns 'undefined' on ios devices 
-        // // we are using Ti.UI.orientation (which is deprecated and no longer 
-        // // working on Android devices.)
-        // if(Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad'){
-            // picker.setOrientation(Ti.UI.orientation);
-        // }   
-        // else {
-            // picker.setOrientation(window.orientation);
-        // }
-//         
-        // picker.setSize(Ti.Platform.displayCaps.platformWidth, 
-                       // Ti.Platform.displayCaps.platformHeight);
-        // picker.startScanning();     // startScanning() has to be called after the window is opened. 
-    // });
+
     // Stops the scanner, removes it from the window and closes the latter.
 	function closeScanner() {
 	    if (picker != null) {
